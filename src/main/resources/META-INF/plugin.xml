@@ -1,0 +1,42 @@
+<idea-plugin>
+  <id>com.chriscarini.jetbrains.jetbrains-auto-power-saver</id>
+  <name>Automatic Power Saver</name>
+  <vendor email="jetbrains@chriscarini.com" url="https://jetbrains.chriscarini.com">Chris Carini</vendor>
+
+  <description><![CDATA[
+    A plugin that automatically enables power save mode when window focus is lost.
+    ]]></description>
+
+  <idea-version since-build="183" until-build="183.*"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService
+        serviceImplementation="com.chriscarini.jetbrains.autopowersaver.settings.SettingsManager"/>
+    <applicationConfigurable
+        instance="com.chriscarini.jetbrains.autopowersaver.settings.SettingsConfigurable"/>
+
+
+    <!-- We register this to allow basic stats on how many times this plugin helped the user -->
+    <productivityFeaturesProvider
+        implementation="com.chriscarini.jetbrains.autopowersaver.productivity.AutoPowerSaverProductivityFeaturesProvider"/>
+    <!-- This has to be here, else the html file will not be found. -->
+    <tipAndTrick feature-id="auto.power.saver" file="autoPowerSaver.html"/>
+
+  </extensions>
+
+
+  <application-components>
+    <component>
+      <implementation-class>
+        com.chriscarini.jetbrains.autopowersaver.FocusPowerSaveService
+      </implementation-class>
+    </component>
+  </application-components>
+  <actions>
+    <!-- Add your actions here -->
+  </actions>
+</idea-plugin>
