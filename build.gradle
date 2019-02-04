@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.chriscarini.jetbrains'
-version '0.0.1'
+version '0.0.2'
 
 sourceCompatibility = 1.8
 
@@ -23,13 +23,16 @@ dependencies {
 }
 
 intellij {
-  version '2018.3.4'
+  version '2018.3'
   plugins[]
   pluginName 'Automatic Power Saver'
 }
 
 patchPluginXml {
   changeNotes """
+        <h4>[0.0.2] - 2019-02-04</h4>
+        <h5>Added</h5>
+        <ol><li>This works for any 2018.3 release; there seems to be a bug with the release that locked it to 2018.3.4 and above.</li></ol>
         <h4>[0.0.1] - 2019-01-31</h4>
         <h5>Added</h5>
         <ol><li>Initial release.</li></ol>
