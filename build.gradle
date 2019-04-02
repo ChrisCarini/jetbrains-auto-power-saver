@@ -1,10 +1,10 @@
 plugins {
   id 'java'
-  id 'org.jetbrains.intellij' version '0.4.2'
+  id 'org.jetbrains.intellij' version '0.4.5'
 }
 
 group 'com.chriscarini.jetbrains'
-version '0.0.2'
+version '0.0.4'
 
 sourceCompatibility = 1.8
 
@@ -23,32 +23,34 @@ dependencies {
 }
 
 intellij {
-  version '2018.3'
+  version '2019.1'
   plugins[]
   pluginName 'Automatic Power Saver'
 }
 
 patchPluginXml {
   changeNotes """
-        <h4>[0.0.2] - 2019-02-04</h4>
-        <h5>Added</h5>
-        <ol><li>This works for any 2018.3 release; there seems to be a bug with the release that locked it to 2018.3.4 and above.</li></ol>
-        <h4>[0.0.1] - 2019-01-31</h4>
-        <h5>Added</h5>
-        <ol><li>Initial release.</li></ol>
+        <h2>[0.0.4] - 2019-04-01</h2>
+        <h3>Added</h3>
+        <ol>
+        <li>Upgrading for 2019.1.</li>
+        <li>Adding an icon for use in 2019.1 release.</li>
+        </ol>
         """
 }
 
 // The below file (jetbrainsCredentials.gradle) should contain the below:
 //    project.ext.set("intellijPublishUsername", "YOUR_USERNAME_HERE")
 //    project.ext.set("intellijPublishPassword", "YOUR_PASSWORD_HERE")
+//    project.ext.set("intellijPluginPublishToken", "YOUR_TOKEN_HERE")
 //
 // Because this contains the username and password, this file is also included in .gitignore file.
 apply from: 'jetbrainsCredentials.gradle'
 
 publishPlugin {
-  username intellijPublishUsername
-  password intellijPublishPassword
+//  username intellijPublishUsername
+//  password intellijPublishPassword
+  token intellijPluginPublishToken
 }
 
 task checkJetBrainsCreds {

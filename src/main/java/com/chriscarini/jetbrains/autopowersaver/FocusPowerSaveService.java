@@ -2,10 +2,10 @@ package com.chriscarini.jetbrains.autopowersaver;
 
 import com.chriscarini.jetbrains.autopowersaver.productivity.AutoPowerSaverProductivityFeaturesProvider;
 import com.chriscarini.jetbrains.autopowersaver.settings.SettingsManager;
+import com.intellij.application.Topics;
 import com.intellij.concurrency.JobScheduler;
 import com.intellij.featureStatistics.FeatureUsageTracker;
 import com.intellij.ide.FrameStateListener;
-import com.intellij.ide.FrameStateManager;
 import com.intellij.ide.PowerSaveMode;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
@@ -27,8 +27,8 @@ public class FocusPowerSaveService implements BaseComponent, Disposable {
   public FocusPowerSaveService() {
     Disposer.register(ApplicationManager.getApplication(), this);
 
-    FrameStateManager.getInstance()
-        .addListener(new IdeFrameStatePowerSaveListener(), ApplicationManager.getApplication());
+    Topics.subscribe(FrameStateListener.TOPIC, ApplicationManager.getApplication(),
+        new IdeFrameStatePowerSaveListener());
   }
 
   private static void cancelJobs() {
