@@ -1,10 +1,10 @@
 plugins {
   id 'java'
-  id 'org.jetbrains.intellij' version '0.4.5'
+  id 'org.jetbrains.intellij' version '0.4.9'
 }
 
 group 'com.chriscarini.jetbrains'
-version '0.0.4'
+version '0.0.5'
 
 sourceCompatibility = 1.8
 
@@ -23,18 +23,21 @@ dependencies {
 }
 
 intellij {
-  version '2019.1'
+  version '2019.1.3'
   plugins[]
   pluginName 'Automatic Power Saver'
 }
 
 patchPluginXml {
   changeNotes """
-        <h2>[0.0.4] - 2019-04-01</h2>
-        <h3>Added</h3>
+        <h4>[0.0.5] - 2019-07-24</h4>
+        <h5>Upgrade</h5>
         <ol>
-        <li>Upgrading for 2019.1.</li>
-        <li>Adding an icon for use in 2019.1 release.</li>
+        <li>Upgrading to 2019.1.3.</li>
+        </ol>
+        <h5>Fixed</h5>
+        <ol>
+        <li>Fixing bug for non-`en` locales - No generic resource bundle causes stack trace for non-`en` languages.</li>
         </ol>
         """
 }
