@@ -5,7 +5,7 @@ buildscript {
     // see https://www.jetbrains.com/intellij-repository/releases/
     // and https://www.jetbrains.com/intellij-repository/snapshots/
     // To use/download EAP add '-EAP-SNAPSHOT' to the version, i.e. 'IU-191.6014.8-EAP-SNAPSHOT'
-    intellijVersion = '2019.2'
+    intellijVersion = '2019.2.1'
   }
 }
 
@@ -15,7 +15,7 @@ plugins {
 }
 
 group 'com.chriscarini.jetbrains'
-version '1.0.0'
+version '1.0.1'
 
 sourceCompatibility = javaVersion
 
