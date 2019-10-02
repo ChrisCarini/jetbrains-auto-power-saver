@@ -5,7 +5,7 @@ buildscript {
     // see https://www.jetbrains.com/intellij-repository/releases/
     // and https://www.jetbrains.com/intellij-repository/snapshots/
     // To use/download EAP add '-EAP-SNAPSHOT' to the version, i.e. 'IU-191.6014.8-EAP-SNAPSHOT'
-    intellijVersion = '2019.2.1'
+    intellijVersion = '2019.2.3'
   }
 }
 
@@ -15,7 +15,7 @@ plugins {
 }
 
 group 'com.chriscarini.jetbrains'
-version '1.0.1'
+version '1.0.2'
 
 sourceCompatibility = javaVersion
 
@@ -45,10 +45,10 @@ intellij {
 
 patchPluginXml {
   changeNotes """
-        <h4>[1.0.0] - 2019-07-25</h4>
+        <h4>[1.0.2] - 2019-10-02</h4>
         <h5>Upgrade</h5>
         <ol>
-        <li>Upgrading to 2019.2.</li>
+        <li>Upgrading to 2019.2.3.</li>
         </ol>
         """
 }

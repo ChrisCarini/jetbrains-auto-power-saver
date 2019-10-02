@@ -30,5 +30,6 @@ jobs:
       if: github.event_name != 'pull_request'
       uses: actions/upload-artifact@master
       with:
+        # TODO: This uploads a zip called `distributions`; see what we can do to just upload the produced plugin itself.
         name: distributions
         path: build/distributions
