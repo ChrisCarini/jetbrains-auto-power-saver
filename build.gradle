@@ -5,7 +5,7 @@ buildscript {
     // see https://www.jetbrains.com/intellij-repository/releases/
     // and https://www.jetbrains.com/intellij-repository/snapshots/
     // To use/download EAP add '-EAP-SNAPSHOT' to the version, i.e. 'IU-191.6014.8-EAP-SNAPSHOT'
-    intellijVersion = '2019.2.3'
+    intellijVersion = '2019.3'
   }
 }
 
@@ -15,7 +15,7 @@ plugins {
 }
 
 group 'com.chriscarini.jetbrains'
-version '1.0.2'
+version '1.1.0'
 
 sourceCompatibility = javaVersion
 
@@ -45,10 +45,18 @@ intellij {
 
 patchPluginXml {
   changeNotes """
-        <h4>[1.0.2] - 2019-10-02</h4>
-        <h5>Upgrade</h5>
+        <h2>[1.1.0] - 2019-11-28</h2>
+        <h3>Upgrade</h3>
         <ol>
-        <li>Upgrading to 2019.2.3.</li>
+        <li>Upgrading to 2019.3.</li>
+        </ol>
+        <h3>Added</h3>
+        <ol>
+        <li>N/A</li>
+        </ol>
+        <h3>Fixed</h3>
+        <ol>
+        <li><a href="https://github.com/ChrisCarini/jetbrains-auto-power-saver/issues/4">#4</a> - "Must be executed on UI thread" exception when alt+tabbing into the IDE</li>
         </ol>
         """
 }

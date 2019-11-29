@@ -9,6 +9,7 @@ import com.intellij.ide.FrameStateListener;
 import com.intellij.ide.PowerSaveMode;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.components.BaseComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Disposer;
@@ -77,7 +78,9 @@ public class FocusPowerSaveService implements BaseComponent, Disposable {
 
         if (PowerSaveMode.isEnabled()) {
           LOG.debug("Frame Activated, Power Save Mode disabled; enable!");
-          PowerSaveMode.setEnabled(false);
+          ApplicationManager.getApplication().invokeLater(() -> {
+            PowerSaveMode.setEnabled(false);
+          }, ModalityState.any());
           FeatureUsageTracker.getInstance()
               .triggerFeatureUsed(AutoPowerSaverProductivityFeaturesProvider.AUTO_POWER_SAVER_FEATURE);
         }
@@ -109,7 +112,9 @@ public class FocusPowerSaveService implements BaseComponent, Disposable {
 
         if (!PowerSaveMode.isEnabled()) {
           LOG.debug("Frame Deactivated, Power Save Mode enabledGlobally; disable!");
-          PowerSaveMode.setEnabled(true);
+          ApplicationManager.getApplication().invokeLater(() -> {
+            PowerSaveMode.setEnabled(true);
+          }, ModalityState.any());
           FeatureUsageTracker.getInstance()
               .triggerFeatureUsed(AutoPowerSaverProductivityFeaturesProvider.AUTO_POWER_SAVER_FEATURE);
         }
