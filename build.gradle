@@ -5,17 +5,18 @@ buildscript {
     // see https://www.jetbrains.com/intellij-repository/releases/
     // and https://www.jetbrains.com/intellij-repository/snapshots/
     // To use/download EAP add '-EAP-SNAPSHOT' to the version, i.e. 'IU-191.6014.8-EAP-SNAPSHOT'
-    intellijVersion = '2019.3'
+    intellijVersion = '2020.1'
+//    intellijVersion = '201.6668.60-EAP-SNAPSHOT'
   }
 }
 
 plugins {
   id 'java'
-  id 'org.jetbrains.intellij' version '0.4.9'
+  id 'org.jetbrains.intellij' version '0.4.16'
 }
 
 group 'com.chriscarini.jetbrains'
-version '1.1.0'
+version '2.1.0'
 
 sourceCompatibility = javaVersion
 
@@ -45,20 +46,36 @@ intellij {
 
 patchPluginXml {
   changeNotes """
-        <h2>[1.1.0] - 2019-11-28</h2>
-        <h3>Upgrade</h3>
+        <h4>[2.1.0] - 2020-04-09</h4>
+        <h5>Upgrade</h5>
         <ol>
-        <li>Upgrading to 2019.3.</li>
+        <li>Upgrading to 2020.1</li>
+        <li>Upgrading IntelliJ Gradle plugin to 0.4.16</li>
+        <li>Upgrading Gradle to 6.2</li>
         </ol>
-        <h3>Added</h3>
+        <h5>Added</h5>
+        <ol>
+        <li>GitHub Workflow Action for <a href="https://github.com/marketplace/actions/intellij-platform-plugin-verifier">IntelliJ Platform Plugin Verifier</a></li>
+        </ol>
+        <h5>Fixed</h5>
         <ol>
         <li>N/A</li>
         </ol>
-        <h3>Fixed</h3>
-        <ol>
-        <li><a href="https://github.com/ChrisCarini/jetbrains-auto-power-saver/issues/4">#4</a> - "Must be executed on UI thread" exception when alt+tabbing into the IDE</li>
-        </ol>
         """
+}
+
+// The below will surface warnings as errors - I want
+// this in the project to allow us to catch deprecation
+// notices early and often.
+tasks.withType(JavaCompile){
+  options.compilerArgs.addAll(['-Xlint:all',
+                               '-Xlint:-options',
+                               '-Xlint:-rawtypes',
+                               '-Xlint:-processing',
+                               '-Xlint:-path', // Ignore JBR SDK manifest element warnings
+                               '-proc:none',
+                               '-Werror',
+                               '-Xlint:-classfile']) //ignore warnings from dependencies
 }
 
 if (System.getenv('IS_CI') != "True") {

@@ -10,15 +10,15 @@ import com.intellij.ide.PowerSaveMode;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.components.BaseComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Disposer;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import org.jetbrains.annotations.NonNls;
 
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
-public class FocusPowerSaveService implements BaseComponent, Disposable {
+
+public class FocusPowerSaveService implements Disposable {
   @NonNls
   private static final Logger LOG = Logger.getInstance(FocusPowerSaveService.class);
 

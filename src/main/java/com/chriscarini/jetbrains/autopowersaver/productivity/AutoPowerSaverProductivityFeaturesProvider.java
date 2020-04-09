@@ -5,18 +5,16 @@ import com.intellij.featureStatistics.ApplicabilityFilter;
 import com.intellij.featureStatistics.FeatureDescriptor;
 import com.intellij.featureStatistics.GroupDescriptor;
 import com.intellij.featureStatistics.ProductivityFeaturesProvider;
-import com.intellij.ide.util.TipAndTrickBean;
-import java.util.Collections;
 import org.jetbrains.annotations.NonNls;
+
+import java.util.Collections;
 
 
 public class AutoPowerSaverProductivityFeaturesProvider extends ProductivityFeaturesProvider {
   @NonNls
   private static final String TIP_FILE_NAME = "autoPowerSaver.html";
-  private static final TipAndTrickBean TIP_AND_TRICK_BEAN = TipAndTrickBean.findByFileName(TIP_FILE_NAME);
   @NonNls
-  public static final String AUTO_POWER_SAVER_FEATURE =
-      TIP_AND_TRICK_BEAN != null ? TIP_AND_TRICK_BEAN.featureId : "auto.power.saver";
+  public static final String AUTO_POWER_SAVER_FEATURE = "auto.power.saver";
 
   @Override
   public FeatureDescriptor[] getFeatureDescriptors() {
