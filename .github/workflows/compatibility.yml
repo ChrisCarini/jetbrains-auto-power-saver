@@ -20,16 +20,15 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Build the plugin using Gradle
+      - name: Build the plugin
         run: ./gradlew buildPlugin
         env:
           IS_CI: "True"
 
-      - name: Verify Plugin on IntelliJ Platforms
+      - name: Verify plugin on IntelliJ Platforms
         id: verify
-        uses: ChrisCarini/intellij-platform-plugin-verifier-action@v0.0.1
+        uses: ChrisCarini/intellij-platform-plugin-verifier-action@latest
         with:
-          verifier-version: '1.231'
           ide-versions: |
             ideaIC:2020.1
             ideaIU:2020.1
