@@ -5,18 +5,18 @@ buildscript {
     // see https://www.jetbrains.com/intellij-repository/releases/
     // and https://www.jetbrains.com/intellij-repository/snapshots/
     // To use/download EAP add '-EAP-SNAPSHOT' to the version, i.e. 'IU-191.6014.8-EAP-SNAPSHOT'
-    intellijVersion = '2020.1'
+    intellijVersion = '2020.2'
 //    intellijVersion = '201.6668.60-EAP-SNAPSHOT'
   }
 }
 
 plugins {
   id 'java'
-  id 'org.jetbrains.intellij' version '0.4.16'
+  id 'org.jetbrains.intellij' version '0.4.21'
 }
 
 group 'com.chriscarini.jetbrains'
-version '2.1.0'
+version '2.2.0'
 
 sourceCompatibility = javaVersion
 
@@ -46,16 +46,15 @@ intellij {
 
 patchPluginXml {
   changeNotes """
-        <h4>[2.1.0] - 2020-04-09</h4>
+        <h4>[2.2.0] - 2020-07-29</h4>
         <h5>Upgrade</h5>
         <ol>
-        <li>Upgrading to 2020.1</li>
-        <li>Upgrading IntelliJ Gradle plugin to 0.4.16</li>
-        <li>Upgrading Gradle to 6.2</li>
+        <li>Upgrading to 2020.2</li>
+        <li>Upgrading IntelliJ Gradle plugin to 0.4.21</li>
         </ol>
         <h5>Added</h5>
         <ol>
-        <li>GitHub Workflow Action for <a href="https://github.com/marketplace/actions/intellij-platform-plugin-verifier">IntelliJ Platform Plugin Verifier</a></li>
+        <li>N/A</li>
         </ol>
         <h5>Fixed</h5>
         <ol>
