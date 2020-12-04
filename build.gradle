@@ -1,22 +1,22 @@
 buildscript {
   ext {
-    javaVersion = '1.8'
+    javaVersion = '11'
 
     // see https://www.jetbrains.com/intellij-repository/releases/
     // and https://www.jetbrains.com/intellij-repository/snapshots/
     // To use/download EAP add '-EAP-SNAPSHOT' to the version, i.e. 'IU-191.6014.8-EAP-SNAPSHOT'
-    intellijVersion = '2020.2'
+    intellijVersion = '2020.3'
 //    intellijVersion = '201.6668.60-EAP-SNAPSHOT'
   }
 }
 
 plugins {
   id 'java'
-  id 'org.jetbrains.intellij' version '0.4.21'
+  id 'org.jetbrains.intellij' version '0.6.5'
 }
 
 group 'com.chriscarini.jetbrains'
-version '2.2.0'
+version '2.3.0'
 
 sourceCompatibility = javaVersion
 
@@ -38,6 +38,15 @@ intellij {
   version intellijVersion
   plugins[]
   pluginName 'Automatic Power Saver'
+
+  // TODO (https://youtrack.jetbrains.com/issue/IDEA-252693) - Disabled this task because it was failing. See my
+  //      comment on the above YouTrack issue, and thread here: https://jetbrains-platform.slack.com/archives/C5U8BM1MK/p1604722479347300?thread_ts=1602338567.267100&cid=C5U8BM1MK
+  // Note: This gradle task is only needed if `SearchableConfigurable` is used,
+  //       not `Configurable`.
+  //       See the following comment for details: https://jetbrains-platform.slack.com/archives/C5U8BM1MK/p1606813009234800?thread_ts=1606794793.231900&cid=C5U8BM1MK
+  buildSearchableOptions {
+    enabled = false
+  }
 }
 
 //runIde {
@@ -49,8 +58,9 @@ patchPluginXml {
         <h4>[$version] - ${new Date().format('yyyy-MM-dd')}</h4>
         <h5>Upgrade</h5>
         <ol>
-        <li>Upgrading to 2020.2</li>
-        <li>Upgrading IntelliJ Gradle plugin to 0.4.21</li>
+        <li>Upgrading to 2020.3</li>
+        <li>Upgrading IntelliJ Gradle plugin to 0.6.5</li>
+        <li>Upgrading Java 11 - see <a href="https://blog.jetbrains.com/platform/2020/09/intellij-project-migrates-to-java-11/">the JetBrains Platform blog post announcing the migration</a></li>
         </ol>
         <h5>Added</h5>
         <ol>
