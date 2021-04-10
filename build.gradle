@@ -5,18 +5,18 @@ buildscript {
     // see https://www.jetbrains.com/intellij-repository/releases/
     // and https://www.jetbrains.com/intellij-repository/snapshots/
     // To use/download EAP add '-EAP-SNAPSHOT' to the version, i.e. 'IU-191.6014.8-EAP-SNAPSHOT'
-    intellijVersion = '2020.3'
+    intellijVersion = '2021.1'
 //    intellijVersion = '201.6668.60-EAP-SNAPSHOT'
   }
 }
 
 plugins {
   id 'java'
-  id 'org.jetbrains.intellij' version '0.6.5'
+  id 'org.jetbrains.intellij' version '0.7.2'
 }
 
 group 'com.chriscarini.jetbrains'
-version '2.3.0'
+version '2.4.0'
 
 sourceCompatibility = javaVersion
 
@@ -58,9 +58,8 @@ patchPluginXml {
         <h4>[$version] - ${new Date().format('yyyy-MM-dd')}</h4>
         <h5>Upgrade</h5>
         <ol>
-        <li>Upgrading to 2020.3</li>
-        <li>Upgrading IntelliJ Gradle plugin to 0.6.5</li>
-        <li>Upgrading Java 11 - see <a href="https://blog.jetbrains.com/platform/2020/09/intellij-project-migrates-to-java-11/">the JetBrains Platform blog post announcing the migration</a></li>
+        <li>Upgrading to 2021.1</li>
+        <li>Upgrading IntelliJ Gradle plugin to 0.7.2</li>
         </ol>
         <h5>Added</h5>
         <ol>
