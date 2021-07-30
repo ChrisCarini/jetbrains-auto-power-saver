@@ -5,7 +5,7 @@ buildscript {
     // see https://www.jetbrains.com/intellij-repository/releases/
     // and https://www.jetbrains.com/intellij-repository/snapshots/
     // To use/download EAP add '-EAP-SNAPSHOT' to the version, i.e. 'IU-191.6014.8-EAP-SNAPSHOT'
-    intellijVersion = '2021.1'
+    intellijVersion = '2021.2'
 //    intellijVersion = '201.6668.60-EAP-SNAPSHOT'
   }
 }
@@ -16,7 +16,7 @@ plugins {
 }
 
 group 'com.chriscarini.jetbrains'
-version '2.4.1'
+version '2.5.0'
 
 sourceCompatibility = javaVersion
 
@@ -58,7 +58,7 @@ patchPluginXml {
         <h4>[$version] - ${new Date().format('yyyy-MM-dd')}</h4>
         <h5>Upgrade</h5>
         <ol>
-        <li>N/A</li>
+        <li>Upgrading to 2021.2</li>
         </ol>
         <h5>Added</h5>
         <ol>
@@ -66,7 +66,7 @@ patchPluginXml {
         </ol>
         <h5>Fixed</h5>
         <ol>
-        <li><a href="https://github.com/ChrisCarini/jetbrains-auto-power-saver/issues/11">#11 - [Enhancement] Specify units for delay bars in preferences window.</a></li>
+        <li>N/A</li>
         </ol>
         """
 }

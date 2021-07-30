@@ -1,12 +1,13 @@
 package com.chriscarini.jetbrains.autopowersaver.settings;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.RoamingType;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 
 /**
@@ -17,7 +18,7 @@ public class SettingsManager implements PersistentStateComponent<SettingsManager
   private PowerSaverState myState;
 
   public static SettingsManager getInstance() {
-    return ServiceManager.getService(SettingsManager.class);
+    return ApplicationManager.getApplication().getService(SettingsManager.class);
   }
 
   @NotNull

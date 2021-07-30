@@ -13,7 +13,11 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <applicationService
-        serviceImplementation="com.chriscarini.jetbrains.autopowersaver.settings.SettingsManager"/>
+            serviceImplementation="com.chriscarini.jetbrains.autopowersaver.FocusPowerSaveService"
+            preload="true"/>
+    <applicationService
+            serviceImplementation="com.chriscarini.jetbrains.autopowersaver.settings.SettingsManager"
+            preload="true"/>
     <applicationConfigurable
         instance="com.chriscarini.jetbrains.autopowersaver.settings.SettingsConfigurable"/>
 
@@ -28,10 +32,5 @@
 
 
   <application-components>
-    <component>
-      <implementation-class>
-        com.chriscarini.jetbrains.autopowersaver.FocusPowerSaveService
-      </implementation-class>
-    </component>
   </application-components>
 </idea-plugin>
