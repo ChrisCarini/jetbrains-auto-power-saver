@@ -12,7 +12,7 @@ buildscript {
 
 plugins {
   id 'java'
-  id 'org.jetbrains.intellij' version '0.7.2'
+  id 'org.jetbrains.intellij' version '1.1.6'
 }
 
 group 'com.chriscarini.jetbrains'
@@ -35,9 +35,9 @@ dependencies {
 }
 
 intellij {
-  version intellijVersion
-  plugins[]
-  pluginName 'Automatic Power Saver'
+  version.set(intellijVersion)
+  plugins.set([])
+  pluginName.set('Automatic Power Saver')
 
   // TODO (https://youtrack.jetbrains.com/issue/IDEA-252693) - Disabled this task because it was failing. See my
   //      comment on the above YouTrack issue, and thread here: https://jetbrains-platform.slack.com/archives/C5U8BM1MK/p1604722479347300?thread_ts=1602338567.267100&cid=C5U8BM1MK
@@ -54,11 +54,13 @@ intellij {
 //}
 
 patchPluginXml {
-  changeNotes """
+  changeNotes.set("""
         <h4>[$version] - ${new Date().format('yyyy-MM-dd')}</h4>
         <h5>Upgrade</h5>
         <ol>
         <li>Upgrading to 2021.2</li>
+        <li>Upgrading Gradle to 6.6</li>
+        <li>Upgrading Gradle IntelliJ Plugin to 1.1.6</li>
         </ol>
         <h5>Added</h5>
         <ol>
@@ -68,7 +70,7 @@ patchPluginXml {
         <ol>
         <li>N/A</li>
         </ol>
-        """
+        """)
 }
 
 // The below will surface warnings as errors - I want
@@ -95,9 +97,9 @@ if (System.getenv('IS_CI') != "True") {
   apply from: 'jetbrainsCredentials.gradle'
 
   publishPlugin {
-//    username intellijPublishUsername
-//    password intellijPublishPassword
-    token intellijPluginPublishToken
+//    username.set(intellijPublishUsername)
+//    password.set(intellijPublishPassword)
+    token.set(intellijPluginPublishToken)
   }
 
   task checkJetBrainsCreds {
