@@ -127,7 +127,8 @@ tasks {
 
   // NOTE: This plugin is not published to the marketplace!!! You won't be able to publish it!!
   publishPlugin {
-    dependsOn("patchChangelog")
+    // TODO(ChrisCarini) - I believe this can be removed, as it is taken care of in the `release.yml` file.
+//    dependsOn("patchChangelog")
     dependsOn('checkJetBrainsSecrets')
     token.set(publishPluginToken)
 
