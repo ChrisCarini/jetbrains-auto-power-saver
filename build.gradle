@@ -1,27 +1,153 @@
-buildscript {
-  ext {
-    javaVersion = '11'
+import java.util.stream.Collectors
+import org.jetbrains.changelog.ExtensionsKt
+import org.jetbrains.intellij.tasks.RunPluginVerifierTask.FailureLevel
 
-    // see https://www.jetbrains.com/intellij-repository/releases/
-    // and https://www.jetbrains.com/intellij-repository/snapshots/
-    // To use/download EAP add '-EAP-SNAPSHOT' to the version, i.e. 'IU-191.6014.8-EAP-SNAPSHOT'
-    intellijVersion = '2021.2'
-//    intellijVersion = '201.6668.60-EAP-SNAPSHOT'
-  }
-}
+String properties(String key) { return project.findProperty(key).toString() }
 
 plugins {
+  id 'idea'
   id 'java'
-  id 'org.jetbrains.intellij' version '1.1.6'
+  id 'org.jetbrains.intellij' version '1.2.0'
+  id 'org.jetbrains.changelog' version '1.3.0'
+  id 'org.jetbrains.qodana' version '0.1.13'
 }
 
-group 'com.chriscarini.jetbrains'
-version '2.5.0'
+apply plugin: 'org.jetbrains.changelog'
 
-sourceCompatibility = javaVersion
+group properties("pluginGroup")
+version properties("pluginVersion")
+
 
 repositories {
   mavenCentral()
+}
+
+intellij {
+  pluginName.set(properties("pluginName"))
+  version.set(properties("platformVersion"))
+  type.set(properties("platformType"))
+  downloadSources.set(properties("platformDownloadSources").toBoolean())
+
+  // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
+  plugins.set(properties("platformPlugins").length() == 0 ? [] : Arrays.asList(properties("platformPlugins").split(',')))
+
+  // TODO (https://youtrack.jetbrains.com/issue/IDEA-252693) - Disabled this task because it was failing. See my
+  //      comment on the above YouTrack issue, and thread here: https://jetbrains-platform.slack.com/archives/C5U8BM1MK/p1604722479347300?thread_ts=1602338567.267100&cid=C5U8BM1MK
+  // Note: This gradle task is only needed if `SearchableConfigurable` is used,
+  //       not `Configurable`.
+  //       See the following comment for details: https://jetbrains-platform.slack.com/archives/C5U8BM1MK/p1606813009234800?thread_ts=1606794793.231900&cid=C5U8BM1MK
+  buildSearchableOptions.enabled = false
+}
+
+changelog {
+  version = properties("pluginVersion")
+  header = "[${-> version.get()}] - ${new Date().format('yyyy-MM-dd')}"
+}
+
+// Configure Gradle Qodana Plugin - read more: https://github.com/JetBrains/gradle-qodana-plugin
+qodana {
+  cachePath.set(project.file(".qodana").canonicalPath)
+  reportPath.set(project.file("build/reports/inspections").canonicalPath)
+  saveReport.set(true)
+  showReport.set(System.getenv("QODANA_SHOW_REPORT") == null ? true : System.getenv("QODANA_SHOW_REPORT").toBoolean())
+}
+
+tasks {
+  sourceCompatibility = properties("javaVersion")
+  targetCompatibility = properties("javaVersion")
+
+  wrapper {
+    gradleVersion = properties("gradleVersion")
+  }
+
+  patchPluginXml {
+    version.set(properties("pluginVersion"))
+
+    // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
+    pluginDescription.set(
+        ExtensionsKt.markdownToHTML(
+            project.file("README.md").text.lines()
+                .dropWhile({ String sx -> !sx.equals("<!-- Plugin description -->") })
+                .skip(1)
+                .takeWhile({ String sx -> !sx.equals("<!-- Plugin description end -->") })
+                .collect(Collectors.joining('\n'))
+        )
+    )
+
+    def changeLogForVersion = changelog.getOrNull(properties("pluginVersion"))
+    changeNotes.set((changeLogForVersion != null ? changeLogForVersion : changelog.getLatest()).toHTML())
+  }
+
+  runPluginVerifier {
+    ideVersions = Arrays.asList(properties("pluginVerifierIdeVersions").split(','))
+    def includeFailureLevels = FailureLevel.ALL
+    // Exclude `NOT_DYNAMIC` Failure Level because we make use of `productivityFeaturesProvider` (in `plugin.xml`)
+    // which is considered to be a non-dynamic feature.
+    includeFailureLevels.remove(FailureLevel.NOT_DYNAMIC)
+    failureLevel = includeFailureLevels
+  }
+
+  // Set the respective compiler arguments to fail the build if there are warnings.
+  tasks.withType(JavaCompile) {
+    options.compilerArgs.addAll([
+        '-Xlint:all',
+        '-Xlint:-options',
+        '-Xlint:-rawtypes',
+        '-Xlint:-processing',
+        '-Xlint:-path', // Ignore JBR SDK manifest element warnings
+        '-proc:none',
+        '-Werror',
+        '-Xlint:-classfile'
+    ]) //ignore warnings from dependencies
+  }
+
+  // NOTE: This plugin is not published to the marketplace!!! You won't be able to publish it!!
+  if (System.getenv('CI') != "true") {
+    // The below file (jetbrainsCredentials.gradle) should contain the below:
+    //     project.ext.set("intellijSignPluginCertificateChain", new File('./chain.crt').getText('UTF-8'))
+    //     project.ext.set("intellijSignPluginPrivateKey", new File('./private.pem').getText('UTF-8'))
+    //     project.ext.set("intellijSignPluginPassword", "YOUR_PRIV_KEY_PASSWORD_HERE")
+    //     project.ext.set("intellijPluginPublishToken", "YOUR_TOKEN_HERE")
+    //
+    // Because this contains credentials, this file is also included in .gitignore file.
+    apply from: 'jetbrainsCredentials.gradle'
+  }
+
+  def signPluginCertificateChain = System.getenv('CI') != "true" ? intellijSignPluginCertificateChain : System.getenv("CERTIFICATE_CHAIN")
+  def signPluginPrivateKey = System.getenv('CI') != "true" ? intellijSignPluginPrivateKey : System.getenv("PRIVATE_KEY")
+  def signPluginPassword = System.getenv('CI') != "true" ? intellijSignPluginPassword : System.getenv("PRIVATE_KEY_PASSWORD")
+  def publishPluginToken = System.getenv('CI') != "true" ? intellijPluginPublishToken : System.getenv("PUBLISH_TOKEN")
+
+  signPlugin {
+    dependsOn('checkJetBrainsSecrets')
+    certificateChain.set(signPluginCertificateChain)
+    privateKey.set(signPluginPrivateKey)
+    password.set(signPluginPassword)
+  }
+
+  // NOTE: This plugin is not published to the marketplace!!! You won't be able to publish it!!
+  publishPlugin {
+    dependsOn("patchChangelog")
+    dependsOn('checkJetBrainsSecrets')
+    token.set(publishPluginToken)
+
+    // pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
+    // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
+    // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
+    def pluginVersionArray = properties("pluginVersion").split('-')
+    def releaseChannelArray = (pluginVersionArray.length > 1 ? pluginVersionArray[1] : "default").split('\\.').first()
+    channels.set(List.of(releaseChannelArray))
+  }
+
+  // Sanity check task to ensure necessary variables are set.
+  task checkJetBrainsSecrets {
+    doLast {
+      println "signPluginCertificateChain: " + (signPluginCertificateChain ? "IS" : "is NOT") + " set."
+      println "signPluginPrivateKey:       " + (signPluginPrivateKey ? "IS" : "is NOT") + " set."
+      println "signPluginPassword:         " + (signPluginPassword ? "IS" : "is NOT") + " set."
+      println "publishPluginToken:         " + (publishPluginToken ? "IS" : "is NOT") + " set."
+    }
+  }
 }
 
 test {
@@ -29,83 +155,18 @@ test {
   useJUnit()
 }
 
+configurations {
+  provided
+}
+
 dependencies {
-  testCompile 'org.testng:testng:6.1.1'
-  testCompile "org.mockito:mockito-core:2.18.0"
+  provided localGroovy()
+  provided gradleApi()
+  testCompile 'org.testng:testng:7.4.0'
+  testCompile "org.mockito:mockito-core:4.0.0"
 }
 
-intellij {
-  version.set(intellijVersion)
-  plugins.set([])
-  pluginName.set('Automatic Power Saver')
-
-  // TODO (https://youtrack.jetbrains.com/issue/IDEA-252693) - Disabled this task because it was failing. See my
-  //      comment on the above YouTrack issue, and thread here: https://jetbrains-platform.slack.com/archives/C5U8BM1MK/p1604722479347300?thread_ts=1602338567.267100&cid=C5U8BM1MK
-  // Note: This gradle task is only needed if `SearchableConfigurable` is used,
-  //       not `Configurable`.
-  //       See the following comment for details: https://jetbrains-platform.slack.com/archives/C5U8BM1MK/p1606813009234800?thread_ts=1606794793.231900&cid=C5U8BM1MK
-  buildSearchableOptions {
-    enabled = false
-  }
-}
-
-//runIde {
-//  jbrVersion 'jbrex8u202b1483.21'
-//}
-
-patchPluginXml {
-  changeNotes.set("""
-        <h4>[$version] - ${new Date().format('yyyy-MM-dd')}</h4>
-        <h5>Upgrade</h5>
-        <ol>
-        <li>Upgrading to 2021.2</li>
-        <li>Upgrading Gradle to 6.6</li>
-        <li>Upgrading Gradle IntelliJ Plugin to 1.1.6</li>
-        </ol>
-        <h5>Added</h5>
-        <ol>
-        <li>N/A</li>
-        </ol>
-        <h5>Fixed</h5>
-        <ol>
-        <li>N/A</li>
-        </ol>
-        """)
-}
-
-// The below will surface warnings as errors - I want
-// this in the project to allow us to catch deprecation
-// notices early and often.
-tasks.withType(JavaCompile){
-  options.compilerArgs.addAll(['-Xlint:all',
-                               '-Xlint:-options',
-                               '-Xlint:-rawtypes',
-                               '-Xlint:-processing',
-                               '-Xlint:-path', // Ignore JBR SDK manifest element warnings
-                               '-proc:none',
-                               '-Werror',
-                               '-Xlint:-classfile']) //ignore warnings from dependencies
-}
-
-if (System.getenv('IS_CI') != "True") {
-  // The below file (jetbrainsCredentials.gradle) should contain the below:
-  //    project.ext.set("intellijPublishUsername", "YOUR_USERNAME_HERE")
-  //    project.ext.set("intellijPublishPassword", "YOUR_PASSWORD_HERE")
-  //    project.ext.set("intellijPluginPublishToken", "YOUR_TOKEN_HERE")
-  //
-  // Because this contains the username and password, this file is also included in .gitignore file.
-  apply from: 'jetbrainsCredentials.gradle'
-
-  publishPlugin {
-//    username.set(intellijPublishUsername)
-//    password.set(intellijPublishPassword)
-    token.set(intellijPluginPublishToken)
-  }
-
-  task checkJetBrainsCreds {
-    doLast {
-      println "Username: " + intellijPublishUsername
-      println "Password " + (project.hasProperty('intellijPublishPassword') ? "IS" : "is NOT") + " set."
-    }
-  }
+// Configure IntelliJ to be aware of Groovy and Gradle APIs to allow resolution and code completion of symbols in build.gradle
+idea.module {
+  scopes.PROVIDED.plus += [configurations.provided]
 }
