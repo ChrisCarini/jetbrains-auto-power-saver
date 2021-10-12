@@ -26,7 +26,7 @@
     <productivityFeaturesProvider
         implementation="com.chriscarini.jetbrains.autopowersaver.productivity.AutoPowerSaverProductivityFeaturesProvider"/>
     <!-- This has to be here, else the html file will not be found. -->
-    <tipAndTrick feature-id="auto.power.saver" file="autoPowerSaver.html"/>
+    <tipAndTrick file="autoPowerSaver.html"/>
 
   </extensions>
 
