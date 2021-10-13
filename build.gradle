@@ -127,7 +127,9 @@ tasks {
 
   // NOTE: This plugin is not published to the marketplace!!! You won't be able to publish it!!
   publishPlugin {
-    // TODO(ChrisCarini) - I believe this can be removed, as it is taken care of in the `release.yml` file.
+    // TODO(ChrisCarini - 2021-10-12) - The `patchChangelog` dependency is not needed,
+    //  because it is taken care of in the `release.yml` file. Follow up with the IJ
+    //  plugin template to see if this is removed / modified in a month or so.
 //    dependsOn("patchChangelog")
     dependsOn('checkJetBrainsSecrets')
     token.set(publishPluginToken)
