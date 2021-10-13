@@ -83,6 +83,7 @@ tasks {
     def includeFailureLevels = FailureLevel.ALL
     // Exclude `NOT_DYNAMIC` Failure Level because we make use of `productivityFeaturesProvider` (in `plugin.xml`)
     // which is considered to be a non-dynamic feature.
+    // Failure Levels: https://github.com/JetBrains/gradle-intellij-plugin/blob/master/src/main/kotlin/org/jetbrains/intellij/tasks/RunPluginVerifierTask.kt
     includeFailureLevels.remove(FailureLevel.NOT_DYNAMIC)
     failureLevel = includeFailureLevels
   }
