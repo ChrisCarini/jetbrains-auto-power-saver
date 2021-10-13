@@ -3,10 +3,6 @@
   <name>Automatic Power Saver</name>
   <vendor email="jetbrains@chriscarini.com" url="https://jetbrains.chriscarini.com">Chris Carini</vendor>
 
-  <description><![CDATA[
-    A plugin that automatically enables power save mode when window focus is lost.
-    ]]></description>
-
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
        on how to target different products -->
   <depends>com.intellij.modules.platform</depends>
