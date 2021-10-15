@@ -102,7 +102,6 @@ tasks {
     ]) //ignore warnings from dependencies
   }
 
-  // NOTE: This plugin is not published to the marketplace!!! You won't be able to publish it!!
   if (System.getenv('CI') != "true") {
     // The below file (jetbrainsCredentials.gradle) should contain the below:
     //     project.ext.set("intellijSignPluginCertificateChain", new File('./chain.crt').getText('UTF-8'))
@@ -126,12 +125,7 @@ tasks {
     password.set(signPluginPassword)
   }
 
-  // NOTE: This plugin is not published to the marketplace!!! You won't be able to publish it!!
   publishPlugin {
-    // TODO(ChrisCarini - 2021-10-12) - The `patchChangelog` dependency is not needed,
-    //  because it is taken care of in the `release.yml` file. Follow up with the IJ
-    //  plugin template to see if this is removed / modified in a month or so.
-//    dependsOn("patchChangelog")
     dependsOn('checkJetBrainsSecrets')
     token.set(publishPluginToken)
 
