@@ -23,7 +23,7 @@ public class SettingsConfigurable implements Configurable {
 
   @SuppressWarnings("WeakerAccess")
   protected static final int maxDelay = 90;
-  private final JPanel mainPanel = new JBPanel();
+  private final JPanel mainPanel = new JBPanel<>();
 
   private final JBCheckBox enableGloballyField = new JBCheckBox();
   private final JBCheckBox enableActivatedField = new JBCheckBox();

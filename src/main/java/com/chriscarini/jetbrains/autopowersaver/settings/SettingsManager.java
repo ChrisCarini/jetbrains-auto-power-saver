@@ -2,7 +2,6 @@ package com.chriscarini.jetbrains.autopowersaver.settings;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.RoamingType;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import org.jetbrains.annotations.NotNull;
@@ -13,7 +12,7 @@ import java.util.Objects;
 /**
  * The {@link SettingsManager} for this plugin; settings will be stored out to and read from {@code auto-power-saver.xml}.
  */
-@State(name = "autoPowerSaver", storages = @Storage(value = "auto-power-saver.xml", roamingType = RoamingType.DEFAULT))
+@State(name = "autoPowerSaver", storages = @Storage(value = "auto-power-saver.xml"))
 public class SettingsManager implements PersistentStateComponent<SettingsManager.PowerSaverState> {
   private PowerSaverState myState;
 
