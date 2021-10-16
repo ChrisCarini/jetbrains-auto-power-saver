@@ -25,8 +25,4 @@
     <tipAndTrick file="autoPowerSaver.html"/>
 
   </extensions>
-
-
-  <application-components>
-  </application-components>
 </idea-plugin>

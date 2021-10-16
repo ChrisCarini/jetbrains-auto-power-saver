@@ -22,8 +22,8 @@ public class FocusPowerSaveService implements Disposable {
   @NonNls
   private static final Logger LOG = Logger.getInstance(FocusPowerSaveService.class);
 
-  private static ScheduledFuture frameActivatedJob;
-  private static ScheduledFuture frameDeactivatedJob;
+  private static ScheduledFuture<?> frameActivatedJob;
+  private static ScheduledFuture<?> frameDeactivatedJob;
 
   public FocusPowerSaveService() {
     Disposer.register(ApplicationManager.getApplication(), this);
@@ -78,9 +78,7 @@ public class FocusPowerSaveService implements Disposable {
 
         if (PowerSaveMode.isEnabled()) {
           LOG.debug("Frame Activated, Power Save Mode disabled; enable!");
-          ApplicationManager.getApplication().invokeLater(() -> {
-            PowerSaveMode.setEnabled(false);
-          }, ModalityState.any());
+          ApplicationManager.getApplication().invokeLater(() -> PowerSaveMode.setEnabled(false), ModalityState.any());
           FeatureUsageTracker.getInstance()
               .triggerFeatureUsed(AutoPowerSaverProductivityFeaturesProvider.AUTO_POWER_SAVER_FEATURE);
         }
@@ -112,9 +110,7 @@ public class FocusPowerSaveService implements Disposable {
 
         if (!PowerSaveMode.isEnabled()) {
           LOG.debug("Frame Deactivated, Power Save Mode enabledGlobally; disable!");
-          ApplicationManager.getApplication().invokeLater(() -> {
-            PowerSaveMode.setEnabled(true);
-          }, ModalityState.any());
+          ApplicationManager.getApplication().invokeLater(() -> PowerSaveMode.setEnabled(true), ModalityState.any());
           FeatureUsageTracker.getInstance()
               .triggerFeatureUsed(AutoPowerSaverProductivityFeaturesProvider.AUTO_POWER_SAVER_FEATURE);
         }
