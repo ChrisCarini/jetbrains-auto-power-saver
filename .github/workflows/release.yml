@@ -60,6 +60,8 @@ jobs:
           git config user.name "GitHub Action"
 
           git checkout -b $BRANCH
+          git status
+          git diff | cat
           git commit -am "Changelog update - $VERSION"
           git push --set-upstream origin $BRANCH
 
