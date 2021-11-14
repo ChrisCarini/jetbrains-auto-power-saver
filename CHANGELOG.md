@@ -10,11 +10,23 @@
 ### Deprecated
 
 ### Removed
-- Remove `description` from `plugin.xml` _(value is taken from `README.md` as part of Gradle `patchPluginXml` task)_
 
 ### Fixed
 
 ### Security
+
+## [2.5.2-EAP] - 2021-11-14
+### EAP Release Notes for v2.5.2-EAP
+
+The `2.5.2-EAP` release is intended for 2021.3 Beta build `213.5744.18` released on `2021-11-10`.
+
+To install this EAP, please configure your installation of IntelliJ `213.5733.18` plugin repository to include the `eap` channel.
+
+Instructions on how to set a custom plugin repository can be found [here](https://www.jetbrains.com/help/idea/managing-plugins.html#repos); you will use the following URL for the `eap` release channel: `https://plugins.jetbrains.com/plugins/eap/list`
+
+### Removed
+- Remove `description` from `plugin.xml` _(value is taken from `README.md` as part of Gradle `patchPluginXml` task)_
+EOM)
 
 ## [2.5.1] - 2021-10-12
 ### Added
