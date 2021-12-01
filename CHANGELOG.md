@@ -6,7 +6,6 @@
 ### Added
 
 ### Changed
-- Upgrading IntelliJ to 2021.3
 
 ### Deprecated
 
@@ -15,6 +14,10 @@
 ### Fixed
 
 ### Security
+
+## [2.5.2] - 2021-11-30
+### Changed
+- Upgrading IntelliJ to 2021.3
 
 ## [2.5.2-EAP] - 2021-11-14
 ### EAP Release Notes for v2.5.2-EAP
