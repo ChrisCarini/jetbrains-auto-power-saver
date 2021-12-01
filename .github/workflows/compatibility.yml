@@ -14,7 +14,7 @@ on:
 
 jobs:
   compatibility:
-    name: Ensure plugin compatibility against plugin's targeted platform version & the latest EAP snapshot for both IDEA Community, IDEA Ultimate.
+    name: Ensure plugin compatibility against targeted platform version & the latest EAP snapshot for both IDEA Community, IDEA Ultimate.
 
     runs-on: ubuntu-latest
 
