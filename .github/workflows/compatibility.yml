@@ -14,7 +14,7 @@ on:
 
 jobs:
   compatibility:
-    name: Ensure plugin compatibility against 2021.2.2 & the latest EAP snapshot for both IDEA Community, IDEA Ultimate.
+    name: Ensure plugin compatibility against plugin's targeted platform version & the latest EAP snapshot for both IDEA Community, IDEA Ultimate.
 
     runs-on: ubuntu-latest
 
@@ -36,8 +36,8 @@ jobs:
         uses: ChrisCarini/intellij-platform-plugin-verifier-action@latest
         with:
           ide-versions: |
-            ideaIC:2021.2.2
-            ideaIU:2021.2.2
+            ideaIC:2021.3
+            ideaIU:2021.3
             ideaIC:LATEST-EAP-SNAPSHOT
             ideaIU:LATEST-EAP-SNAPSHOT
 
