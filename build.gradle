@@ -161,7 +161,7 @@ dependencies {
   provided localGroovy()
   provided gradleApi()
   testCompile 'org.testng:testng:7.5'
-  testCompile "org.mockito:mockito-core:4.3.1"
+  testCompile "org.mockito:mockito-core:4.4.0"
 }
 
 // Configure IntelliJ to be aware of Groovy and Gradle APIs to allow resolution and code completion of symbols in build.gradle
