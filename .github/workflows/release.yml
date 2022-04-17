@@ -85,4 +85,5 @@ jobs:
             --title "Changelog update - \`$VERSION\`" \
             --body "Current pull request contains patched \`CHANGELOG.md\` file for the \`$VERSION\` version." \
             --base master \
+            --label "merge when passing" \
             --head $BRANCH
