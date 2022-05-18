@@ -160,7 +160,7 @@ configurations {
 dependencies {
   provided localGroovy()
   provided gradleApi()
-  testCompile 'org.testng:testng:7.5'
+  testCompile 'org.testng:testng:7.6.0'
   testCompile "org.mockito:mockito-core:4.5.1"
 }
 
