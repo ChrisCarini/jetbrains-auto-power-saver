@@ -103,6 +103,6 @@ jobs:
           gh pr create \
             --title "Changelog update - \`$VERSION\`" \
             --body "$PR_BODY" \
-            --base master \
+            --base main \
             --label "merge when passing" \
             --head $BRANCH

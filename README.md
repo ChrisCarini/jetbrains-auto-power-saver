@@ -1,6 +1,6 @@
 # Automatic Power Saver JetBrains Plugin
 
-[![GitHub License](https://img.shields.io/github/license/ChrisCarini/jetbrains-auto-power-saver?style=flat-square)](https://github.com/ChrisCarini/jetbrains-auto-power-saver/blob/master/LICENSE)
+[![GitHub License](https://img.shields.io/github/license/ChrisCarini/jetbrains-auto-power-saver?style=flat-square)](https://github.com/ChrisCarini/jetbrains-auto-power-saver/blob/main/LICENSE)
 [![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/v/11941-automatic-power-saver?label=Latest%20Plugin%20Release&style=flat-square)](https://plugins.jetbrains.com/plugin/11941-automatic-power-saver)
 [![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/r/rating/11941-automatic-power-saver?style=flat-square)](https://plugins.jetbrains.com/plugin/11941-automatic-power-saver)
 [![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/d/11941-automatic-power-saver?style=flat-square)](https://plugins.jetbrains.com/plugin/11941-automatic-power-saver)
