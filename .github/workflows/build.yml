@@ -74,11 +74,11 @@ jobs:
           path: ${{ steps.properties.outputs.pluginVerifierHomeDir }}/ides
           key: ${{ runner.os }}-plugin-verifier-${{ steps.properties.outputs.ideVersions }}
 
-#      ## TODO (ChrisCarini) - Disabling this in the GH action; when running we see the below error message:
-#      ##   STDERR: Could not read script '/data/project/jetbrainsCredentials.gradle' as it does not exist
-#      # Run Qodana inspections
-#      - name: Qodana - Code Inspection
-#        uses: JetBrains/qodana-action@v2.1-eap
+      ### TODO (ChrisCarini) - Disabling this in the GH action; when running we see the below error message:
+      ###   STDERR: Could not read script '/data/project/jetbrainsCredentials.gradle' as it does not exist
+      ## Run Qodana inspections
+      #- name: Qodana - Code Inspection
+      #  uses: JetBrains/qodana-action@v2.1-eap
 
       # Run tests
       - name: Run Tests
