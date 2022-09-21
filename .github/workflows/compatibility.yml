@@ -31,15 +31,15 @@ jobs:
       - name: Build the plugin
         run: ./gradlew buildPlugin
 
+      - name: Generate IDE Versions List
+        run: ./gradlew generateIdeVersionsList
+
       - name: Verify plugin on IntelliJ Platforms
         id: verify
         uses: ChrisCarini/intellij-platform-plugin-verifier-action@latest
         with:
-          ide-versions: |
-            ideaIC:2022.2
-            ideaIU:2022.2
-            ideaIC:LATEST-EAP-SNAPSHOT
-            ideaIU:LATEST-EAP-SNAPSHOT
+          # Generated from the `generateIdeVersionsList` task above.
+          ide-versions: build/intellij-platform-plugin-verifier-action-ide-versions-file.txt
 
       - name: Get log file path and print contents
         run: |
