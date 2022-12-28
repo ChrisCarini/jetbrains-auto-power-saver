@@ -5,13 +5,14 @@ import com.chriscarini.jetbrains.autopowersaver.settings.SettingsManager;
 import com.intellij.application.Topics;
 import com.intellij.concurrency.JobScheduler;
 import com.intellij.featureStatistics.FeatureUsageTracker;
-import com.intellij.ide.FrameStateListener;
 import com.intellij.ide.PowerSaveMode;
 import com.intellij.openapi.Disposable;
+import com.intellij.openapi.application.ApplicationActivationListener;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Disposer;
+import com.intellij.openapi.wm.IdeFrame;
 import org.jetbrains.annotations.NonNls;
 
 import java.util.concurrent.ScheduledFuture;
@@ -28,7 +29,7 @@ public class FocusPowerSaveService implements Disposable {
   public FocusPowerSaveService() {
     Disposer.register(ApplicationManager.getApplication(), this);
 
-    Topics.subscribe(FrameStateListener.TOPIC, ApplicationManager.getApplication(),
+    Topics.subscribe(ApplicationActivationListener.TOPIC, ApplicationManager.getApplication(),
         new IdeFrameStatePowerSaveListener());
   }
 
@@ -52,9 +53,9 @@ public class FocusPowerSaveService implements Disposable {
   /**
    * Listener that enables/disables {@link PowerSaveMode} on frame activate/deactivate.
    */
-  private static class IdeFrameStatePowerSaveListener implements FrameStateListener {
+  private static class IdeFrameStatePowerSaveListener implements ApplicationActivationListener {
     @Override
-    public void onFrameActivated() {
+    public void applicationActivated(IdeFrame ideFrame) {
       LOG.debug("IDE Frame Activated...");
       if (ApplicationManager.getApplication().isDisposed()) {
         return;
@@ -86,7 +87,7 @@ public class FocusPowerSaveService implements Disposable {
     }
 
     @Override
-    public void onFrameDeactivated() {
+    public void applicationDeactivated(IdeFrame ideFrame) {
       LOG.debug("IDE Frame Deactivated...");
       if (ApplicationManager.getApplication().isDisposed()) {
         return;
