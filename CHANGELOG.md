@@ -6,6 +6,7 @@
 ### Added
 
 ### Changed
+- Upgrading IntelliJ from 2022.3.1 to 2022.3.2
 
 ### Deprecated
 
