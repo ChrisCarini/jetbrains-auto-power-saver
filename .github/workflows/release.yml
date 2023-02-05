@@ -17,13 +17,13 @@ jobs:
 
       # Check out current repository
       - name: Fetch Sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
         with:
           ref: ${{ github.event.release.tag_name }}
 
       # Setup Java 17 environment for the next steps
       - name: Setup Java 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@1df8dbefe2a8cbc99770194893dd902763bee34b # v3.9.0
         with:
           distribution: zulu
           java-version: 17
@@ -84,17 +84,21 @@ jobs:
           #       
           #       URL: https://github.com/peter-evans/create-pull-request/blob/main/docs/concepts-guidelines.md#workarounds-to-trigger-further-workflow-runs
           #
-          PR_BODY="$(cat << 'EOM' | sed -e 's/^[[:space:]]*$//g' -e '/./,$!d'
-          Current pull request contains patched `CHANGELOG.md` file for the `$VERSION` version.
+          # Moving sed prog into variables; see https://stackoverflow.com/a/25021905
+          SED_PROG1='s/^[[:space:]]*$//g'
+          SED_PROG2='/./,$!d'
+          # Unquoted heredoc to allow for variable expansion for $VERSION; see https://stackoverflow.com/a/4938198
+          PR_BODY="$(cat <<-EOM | sed -e $SED_PROG1 -e $SED_PROG2
+          Current pull request contains patched \`CHANGELOG.md\` file for the \`$VERSION\` version.
 
           ## ⚠️🛑⚠️🛑 **WARNING** 🛑⚠️🛑⚠️
           
-          Because the default `GITHUB_TOKEN` is used to generate **this** PR from **within** a workflow, no checks will be run. Follow the below steps to have checks run as desired.
+          Because the default \`GITHUB_TOKEN\` is used to generate **this** PR from **within** a workflow, no checks will be run. Follow the below steps to have checks run as desired.
           
           ### Steps
           1. Click "Close pull request" on this PR
           2. Click "Reopen pull request" on this PR
-          3. Approve this PR's changes
+          3. Approve this PR\'s changes
           EOM
           )"
           
