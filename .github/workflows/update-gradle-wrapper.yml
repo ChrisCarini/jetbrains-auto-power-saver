@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
 
       - name: Update Gradle Wrapper
-        uses: gradle-update/update-gradle-wrapper-action@2eda6ac93d73eb5543958f0354a1230b240f63ec # v1.0.19
+        uses: gradle-update/update-gradle-wrapper-action@981c551b17dbcf1940b1b4435afdb79babb7c13a # v1.0.18
         with:
           reviewers: |
             ChrisCarini
