@@ -1,1 +1,6 @@
 apply from: 'build_standard_jetbrains_plugin_build.gradle'
+
+// Configure CHANGELOG.md - https://github.com/JetBrains/gradle-changelog-plugin
+changelog {
+    repositoryUrl = "https://github.com/ChrisCarini/jetbrains-auto-power-saver"
+}
