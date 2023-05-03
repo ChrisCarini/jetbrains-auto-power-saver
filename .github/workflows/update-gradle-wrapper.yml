@@ -15,7 +15,8 @@ jobs:
       - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
 
       - name: Update Gradle Wrapper
-        uses: gradle-update/update-gradle-wrapper-action@2eda6ac93d73eb5543958f0354a1230b240f63ec # v1.0.19
+        uses: gradle-update/update-gradle-wrapper-action@0407394b9d173dfc9cf5695f9f560fef6d61a5fe # v1.0.20
         with:
+          merge-method: SQUASH
           reviewers: |
             ChrisCarini
