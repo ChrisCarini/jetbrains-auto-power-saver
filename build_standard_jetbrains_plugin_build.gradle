@@ -15,7 +15,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.14.0'
+        classpath 'org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.14.1'
         classpath 'org.jetbrains.changelog:org.jetbrains.changelog.gradle.plugin:2.1.0'
         classpath 'org.jetbrains.qodana:gradle-qodana-plugin:0.1.13'
     }
