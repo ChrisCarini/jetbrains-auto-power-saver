@@ -22,6 +22,8 @@ on:
   pull_request:
 
 jobs:
+  files-changed:
+    uses: ./.github/workflows/files-changed.yaml
 
   # Run Gradle Wrapper Validation Action to verify the wrapper's checksum
   gradleValidation:
@@ -40,7 +42,9 @@ jobs:
   # Run verifyPlugin and test Gradle tasks
   test:
     name: Test
-    needs: gradleValidation
+    needs: [ gradleValidation, files-changed ]
+    # If there are no changes in the changelog or there are changes in more than just the changelog, we want to run this job.
+    if: needs.files-changed.outputs.changelog == 'false' || ( needs.files-changed.outputs.changelog == 'true' && needs.files-changed.outputs.changed_count > 1 )
     runs-on: ubuntu-latest
     steps:
 
@@ -96,7 +100,9 @@ jobs:
   # Requires test job to be passed
   build:
     name: Build
-    needs: test
+    needs: [ test, files-changed ]
+    # If there are no changes in the changelog or there are changes in more than just the changelog, we want to run this job.
+    if: needs.files-changed.outputs.changelog == 'false' || ( needs.files-changed.outputs.changelog == 'true' && needs.files-changed.outputs.changed_count > 1 )
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.properties.outputs.version }}
@@ -147,8 +153,9 @@ jobs:
   # If accepted and published, release workflow would be triggered
   releaseDraft:
     name: Release Draft
-    if: github.event_name != 'pull_request'
-    needs: build
+    # If the event is *not* a PR, and there are no changes in the changelog or there are changes in more than just the changelog, we want to run this job.
+    if: github.event_name != 'pull_request' && (needs.files-changed.outputs.changelog == 'false' || ( needs.files-changed.outputs.changelog == 'true' && needs.files-changed.outputs.changed_count > 1 ))
+    needs: [ build, files-changed ]
     runs-on: ubuntu-latest
     steps:
 
