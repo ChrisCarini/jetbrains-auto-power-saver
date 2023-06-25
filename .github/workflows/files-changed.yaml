@@ -1,0 +1,48 @@
+name: files-changed
+on:
+  workflow_call:
+    # Map the workflow outputs to job outputs
+    outputs:
+      changelog:
+        description: "true/false output of if the changelog changed"
+        value: ${{ jobs.files-changed.outputs.changelog }}
+      changelog_count:
+        description: "The count of all files matching the changelog"
+        value: ${{ jobs.files-changed.outputs.changelog_count }}
+      changelog_files:
+        description: "List of all files matching the changelog"
+        value: ${{ jobs.files-changed.outputs.changelog_files }}
+      changed:
+        description: "true/false output of if any changed"
+        value: ${{ jobs.files-changed.outputs.changed }}
+      changed_count:
+        description: "The count of all files changed"
+        value: ${{ jobs.files-changed.outputs.changed_count }}
+      changed_files:
+        description: "List of all files changed"
+        value: ${{ jobs.files-changed.outputs.changed_files }}
+
+jobs:
+  files-changed:
+    name: detect what files changed
+    runs-on: ubuntu-latest
+    # Map the job outputs to step outputs
+    outputs:
+      changelog: ${{ steps.changes.outputs.changelog }}
+      changelog_count: ${{ steps.changes.outputs.changelog_count }}
+      changelog_files: ${{ steps.changes.outputs.changelog_files }}
+      changed: ${{ steps.changes.outputs.changed }}
+      changed_count: ${{ steps.changes.outputs.changed_count }}
+      changed_files: ${{ steps.changes.outputs.changed_files }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+
+      - uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50 # v2.11.1
+        id: changes
+        with:
+          filters: |
+            changelog:
+              - 'CHANGELOG.md'
+            changed:
+              - '**'
