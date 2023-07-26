@@ -7,6 +7,7 @@
 ### Added
 
 ### Changed
+- Upgrading IntelliJ from 2023.1.4 to 2023.1.5
 
 ### Deprecated
 
