@@ -31,6 +31,10 @@ public class FocusPowerSaveService implements Disposable {
 
     Topics.subscribe(ApplicationActivationListener.TOPIC, ApplicationManager.getApplication(),
         new IdeFrameStatePowerSaveListener());
+
+//    @Deprecated(message = "Register a lazy listener, or, if not possible, use `com.intellij.util.messages.MessageBus.connect(com.intellij.openapi.Disposable)` and `com.intellij.util.messages.SimpleMessageBusConnection.subscribe` explicitly.")
+    ApplicationManager.getApplication().getMessageBus().connect(this).subscribe(ApplicationActivationListener.TOPIC, new IdeFrameStatePowerSaveListener());
+
   }
 
   private static void cancelJobs() {
