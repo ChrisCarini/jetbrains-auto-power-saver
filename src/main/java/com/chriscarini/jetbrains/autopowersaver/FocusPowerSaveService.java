@@ -29,8 +29,12 @@ public class FocusPowerSaveService implements Disposable {
   public FocusPowerSaveService() {
     Disposer.register(ApplicationManager.getApplication(), this);
 
-    Topics.subscribe(ApplicationActivationListener.TOPIC, ApplicationManager.getApplication(),
-        new IdeFrameStatePowerSaveListener());
+    ApplicationManager.getApplication().getMessageBus().connect(
+            ApplicationManager.getApplication()
+    ).subscribe(
+            ApplicationActivationListener.TOPIC,
+            new IdeFrameStatePowerSaveListener()
+    );
   }
 
   private static void cancelJobs() {
