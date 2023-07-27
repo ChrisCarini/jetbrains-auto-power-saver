@@ -40,6 +40,14 @@ jobs:
       - name: Generate IDE Versions List
         run: ./gradlew generateIdeVersionsList
 
+      # https://github.com/actions/runner-images/issues/2840#issuecomment-790492173
+      # https://github.com/jlumbroso/free-disk-space
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@76866dbe54312617f00798d1762df7f43def6e5c # v1.2.0
+        with:
+          # this remove tools (actions/setup-java) that are needed; hence, disable.
+          tool-cache: false
+
       - name: Verify plugin on IntelliJ Platforms
         id: verify
         uses: ChrisCarini/intellij-platform-plugin-verifier-action@latest
