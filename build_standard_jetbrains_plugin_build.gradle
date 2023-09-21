@@ -43,13 +43,6 @@ intellij {
 
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
     plugins.set(properties("platformPlugins").length() == 0 ? [] : Arrays.asList(properties("platformPlugins").split(',')))
-
-    // TODO (https://youtrack.jetbrains.com/issue/IDEA-252693) - Disabled this task because it was failing. See my
-    //      comment on the above YouTrack issue, and thread here: https://jetbrains-platform.slack.com/archives/C5U8BM1MK/p1604722479347300?thread_ts=1602338567.267100&cid=C5U8BM1MK
-    // Note: This gradle task is only needed if `SearchableConfigurable` is used,
-    //       not `Configurable`.
-    //       See the following comment for details: https://jetbrains-platform.slack.com/archives/C5U8BM1MK/p1606813009234800?thread_ts=1606794793.231900&cid=C5U8BM1MK
-    buildSearchableOptions.enabled = false
 }
 
 // Configure CHANGELOG.md - https://github.com/JetBrains/gradle-changelog-plugin
