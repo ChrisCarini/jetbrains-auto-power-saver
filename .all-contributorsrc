@@ -23,6 +23,15 @@
         "question",
         "review"
       ]
+    },
+    {
+      "login": "keiki85",
+      "name": "Jens Hauser",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39191724?v=4",
+      "profile": "https://github.com/keiki85",
+      "contributions": [
+        "question"
+      ]
     }
   ]
 }
