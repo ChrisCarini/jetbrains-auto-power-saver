@@ -41,6 +41,18 @@
       "contributions": [
         "question"
       ]
+    },
+    {
+      "login": "Grogs",
+      "name": "Greg Dorrell",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1212907?v=4",
+      "profile": "http://gregd.me",
+      "contributions": [
+        "bug",
+        "code",
+        "maintenance",
+        "review"
+      ]
     }
   ]
 }
