@@ -29,6 +29,7 @@ The [officially released versions of this plugin can be found on plugins.jetbrai
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/keiki85"><img src="https://avatars.githubusercontent.com/u/39191724?v=4?s=100" width="100px;" alt="Jens Hauser"/><br /><sub><b>Jens Hauser</b></sub></a><br /><a href="#question-keiki85" title="Answering Questions">💬</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://gregd.me"><img src="https://avatars.githubusercontent.com/u/1212907?v=4?s=100" width="100px;" alt="Greg Dorrell"/><br /><sub><b>Greg Dorrell</b></sub></a><br /><a href="#bug-Grogs" title="Bug reports">🐛</a> <a href="#code-Grogs" title="Code">💻</a> <a href="#maintenance-Grogs" title="Maintenance">🚧</a> <a href="#review-Grogs" title="Reviewed Pull Requests">👀</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://bluelovers.net"><img src="https://avatars.githubusercontent.com/u/167966?v=4?s=100" width="100px;" alt="bluelovers"/><br /><sub><b>bluelovers</b></sub></a><br /><a href="#bug-bluelovers" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Xplouder"><img src="https://avatars.githubusercontent.com/u/2997254?v=4?s=100" width="100px;" alt="João Silva"/><br /><sub><b>João Silva</b></sub></a><br /><a href="#bug-Xplouder" title="Bug reports">🐛</a> <a href="#ideas-Xplouder" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
   </tbody>
 </table>
