@@ -4,6 +4,7 @@
 [![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/v/11941-automatic-power-saver?label=Latest%20Plugin%20Release&style=flat-square)](https://plugins.jetbrains.com/plugin/11941-automatic-power-saver)
 [![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/r/rating/11941-automatic-power-saver?style=flat-square)](https://plugins.jetbrains.com/plugin/11941-automatic-power-saver)
 [![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/d/11941-automatic-power-saver?style=flat-square)](https://plugins.jetbrains.com/plugin/11941-automatic-power-saver)
+[![All Contributors](https://img.shields.io/github/all-contributors/ChrisCarini/jetbrains-auto-power-saver?color=ee8449&style=flat-square)](#contributors)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ChrisCarini/jetbrains-auto-power-saver/build.yml?branch=main&logo=GitHub&style=flat-square)](https://github.com/ChrisCarini/jetbrains-auto-power-saver/actions/workflows/build.yml)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ChrisCarini/jetbrains-auto-power-saver/compatibility.yml?branch=main&label=IntelliJ%20Plugin%20Compatibility&logo=GitHub&style=flat-square)](https://github.com/ChrisCarini/jetbrains-auto-power-saver/actions/workflows/compatibility.yml)
 
@@ -14,3 +15,14 @@ A JetBrains plugin which automatically enables / disables `Power Save` mode in t
 Tested in IntelliJ, but _should_ work on other JetBrains IDEs.
 
 The [officially released versions of this plugin can be found on plugins.jetbrains.com](https://plugins.jetbrains.com/plugin/11941-automatic-power-saver/).
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
