@@ -53,6 +53,15 @@
         "maintenance",
         "review"
       ]
+    },
+    {
+      "login": "bluelovers",
+      "name": "bluelovers",
+      "avatar_url": "https://avatars.githubusercontent.com/u/167966?v=4",
+      "profile": "http://bluelovers.net",
+      "contributions": [
+        "bug"
+      ]
     }
   ]
 }
