@@ -35,6 +35,7 @@ The [officially released versions of this plugin can be found on plugins.jetbrai
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/adrianbrowning"><img src="https://avatars.githubusercontent.com/u/2430052?v=4?s=100" width="100px;" alt="Adrian Elton-Browning"/><br /><sub><b>Adrian Elton-Browning</b></sub></a><br /><a href="#bug-adrianbrowning" title="Bug reports">🐛</a> <a href="#userTesting-adrianbrowning" title="User Testing">📓</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/eatsmarter-benny"><img src="https://avatars.githubusercontent.com/u/78405000?v=4?s=100" width="100px;" alt="eatsmarter-benny"/><br /><sub><b>eatsmarter-benny</b></sub></a><br /><a href="#bug-eatsmarter-benny" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ukolovda"><img src="https://avatars.githubusercontent.com/u/1921594?v=4?s=100" width="100px;" alt="Dmitry Ukolov"/><br /><sub><b>Dmitry Ukolov</b></sub></a><br /><a href="#bug-ukolovda" title="Bug reports">🐛</a> <a href="#maintenance-ukolovda" title="Maintenance">🚧</a></td>
     </tr>
   </tbody>
 </table>
