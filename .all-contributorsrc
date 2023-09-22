@@ -111,6 +111,15 @@
         "bug",
         "maintenance"
       ]
+    },
+    {
+      "login": "lkraav",
+      "name": "Leho Kraav",
+      "avatar_url": "https://avatars.githubusercontent.com/u/147228?v=4",
+      "profile": "https://conversionready.com",
+      "contributions": [
+        "question"
+      ]
     }
   ]
 }
