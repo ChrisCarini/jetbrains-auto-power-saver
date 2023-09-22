@@ -166,6 +166,15 @@
         "bug",
         "maintenance"
       ]
+    },
+    {
+      "login": "ristomatti",
+      "name": "Ristomatti Airo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9029939?v=4",
+      "profile": "https://github.com/ristomatti",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ]
 }
