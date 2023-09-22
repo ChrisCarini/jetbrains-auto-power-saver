@@ -32,6 +32,9 @@ The [officially released versions of this plugin can be found on plugins.jetbrai
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Xplouder"><img src="https://avatars.githubusercontent.com/u/2997254?v=4?s=100" width="100px;" alt="João Silva"/><br /><sub><b>João Silva</b></sub></a><br /><a href="#bug-Xplouder" title="Bug reports">🐛</a> <a href="#ideas-Xplouder" title="Ideas, Planning, & Feedback">🤔</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://linkedin.com/in/allanlaal"><img src="https://avatars.githubusercontent.com/u/740826?v=4?s=100" width="100px;" alt="Allan Laal"/><br /><sub><b>Allan Laal</b></sub></a><br /><a href="#bug-allanlaal" title="Bug reports">🐛</a> <a href="#ideas-allanlaal" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/adrianbrowning"><img src="https://avatars.githubusercontent.com/u/2430052?v=4?s=100" width="100px;" alt="Adrian Elton-Browning"/><br /><sub><b>Adrian Elton-Browning</b></sub></a><br /><a href="#bug-adrianbrowning" title="Bug reports">🐛</a> <a href="#userTesting-adrianbrowning" title="User Testing">📓</a></td>
+    </tr>
   </tbody>
 </table>
 
