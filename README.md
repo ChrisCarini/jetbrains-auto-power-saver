@@ -39,6 +39,7 @@ The [officially released versions of this plugin can be found on plugins.jetbrai
       <td align="center" valign="top" width="14.28%"><a href="https://conversionready.com"><img src="https://avatars.githubusercontent.com/u/147228?v=4?s=100" width="100px;" alt="Leho Kraav"/><br /><sub><b>Leho Kraav</b></sub></a><br /><a href="#question-lkraav" title="Answering Questions">💬</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://sysadmin.su"><img src="https://avatars.githubusercontent.com/u/2513416?v=4?s=100" width="100px;" alt="Alexander"/><br /><sub><b>Alexander</b></sub></a><br /><a href="#bug-mamahtehok" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/AnomalousUnderdog"><img src="https://avatars.githubusercontent.com/u/553006?v=4?s=100" width="100px;" alt="AnomalousUnderdog"/><br /><sub><b>AnomalousUnderdog</b></sub></a><br /><a href="#bug-AnomalousUnderdog" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/andersodt"><img src="https://avatars.githubusercontent.com/u/1243035?v=4?s=100" width="100px;" alt="Ryan Edward Andersen"/><br /><sub><b>Ryan Edward Andersen</b></sub></a><br /><a href="#bug-andersodt" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
