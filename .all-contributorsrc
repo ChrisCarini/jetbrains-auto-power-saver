@@ -156,6 +156,16 @@
       "contributions": [
         "maintenance"
       ]
+    },
+    {
+      "login": "CrazyBoy49z",
+      "name": "Yurij Finiv",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3448603?v=4",
+      "profile": "https://finiv.in.ua",
+      "contributions": [
+        "bug",
+        "maintenance"
+      ]
     }
   ]
 }
