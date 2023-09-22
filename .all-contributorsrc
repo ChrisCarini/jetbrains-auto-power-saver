@@ -92,6 +92,15 @@
         "bug",
         "userTesting"
       ]
+    },
+    {
+      "login": "eatsmarter-benny",
+      "name": "eatsmarter-benny",
+      "avatar_url": "https://avatars.githubusercontent.com/u/78405000?v=4",
+      "profile": "https://github.com/eatsmarter-benny",
+      "contributions": [
+        "bug"
+      ]
     }
   ]
 }
