@@ -120,6 +120,15 @@
       "contributions": [
         "question"
       ]
+    },
+    {
+      "login": "mamahtehok",
+      "name": "Alexander",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2513416?v=4",
+      "profile": "http://sysadmin.su",
+      "contributions": [
+        "bug"
+      ]
     }
   ]
 }
