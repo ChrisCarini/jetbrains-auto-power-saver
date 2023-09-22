@@ -44,7 +44,7 @@ jobs:
     name: Test
     needs: [ gradleValidation, files-changed ]
     # If there are no changes in the changelog or there are changes in more than just the changelog, we want to run this job.
-    if: needs.files-changed.outputs.changelog == 'false' || ( needs.files-changed.outputs.changelog == 'true' && needs.files-changed.outputs.changed_count > 1 )
+    if: needs.files-changed.outputs.SKIP_CI == 'false'
     runs-on: ubuntu-latest
     steps:
 
@@ -102,7 +102,7 @@ jobs:
     name: Build
     needs: [ test, files-changed ]
     # If there are no changes in the changelog or there are changes in more than just the changelog, we want to run this job.
-    if: needs.files-changed.outputs.changelog == 'false' || ( needs.files-changed.outputs.changelog == 'true' && needs.files-changed.outputs.changed_count > 1 )
+    if: needs.files-changed.outputs.SKIP_CI == 'false'
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.properties.outputs.version }}
@@ -154,7 +154,7 @@ jobs:
   releaseDraft:
     name: Release Draft
     # If the event is *not* a PR, and there are no changes in the changelog or there are changes in more than just the changelog, we want to run this job.
-    if: github.event_name != 'pull_request' && (needs.files-changed.outputs.changelog == 'false' || ( needs.files-changed.outputs.changelog == 'true' && needs.files-changed.outputs.changed_count > 1 ))
+    if: github.event_name != 'pull_request' && needs.files-changed.outputs.SKIP_CI == 'false'
     needs: [ build, files-changed ]
     runs-on: ubuntu-latest
     steps:
