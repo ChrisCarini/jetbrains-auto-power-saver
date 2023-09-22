@@ -3,6 +3,22 @@ on:
   workflow_call:
     # Map the workflow outputs to job outputs
     outputs:
+      SKIP_CI:
+        description: "true/false output of if we should skip CI (for the longer portions)"
+        value: >-
+          ${{
+          ( jobs.files-changed.outputs.changelog == 'true' && jobs.files-changed.outputs.changelog_count == 1 && jobs.files-changed.outputs.changed_count == 1 ) ||
+          ( jobs.files-changed.outputs.allcontributors == 'true' && jobs.files-changed.outputs.allcontributors_count == 2 && jobs.files-changed.outputs.changed_count == 2 )
+          }}
+      allcontributors:
+        description: "true/false output of if the allcontributors changed"
+        value: ${{ jobs.files-changed.outputs.allcontributors }}
+      allcontributors_count:
+        description: "The count of all files matching the allcontributors"
+        value: ${{ jobs.files-changed.outputs.allcontributors_count }}
+      allcontributors_files:
+        description: "List of all files matching the allcontributors"
+        value: ${{ jobs.files-changed.outputs.allcontributors_files }}
       changelog:
         description: "true/false output of if the changelog changed"
         value: ${{ jobs.files-changed.outputs.changelog }}
@@ -28,6 +44,9 @@ jobs:
     runs-on: ubuntu-latest
     # Map the job outputs to step outputs
     outputs:
+      allcontributors: ${{ steps.changes.outputs.allcontributors }}
+      allcontributors_count: ${{ steps.changes.outputs.allcontributors_count }}
+      allcontributors_files: ${{ steps.changes.outputs.allcontributors_files }}
       changelog: ${{ steps.changes.outputs.changelog }}
       changelog_count: ${{ steps.changes.outputs.changelog_count }}
       changelog_files: ${{ steps.changes.outputs.changelog_files }}
@@ -42,6 +61,9 @@ jobs:
         id: changes
         with:
           filters: |
+            allcontributors:
+              - '.all-contributorsrc'
+              - 'README.md'
             changelog:
               - 'CHANGELOG.md'
             changed:
