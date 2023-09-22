@@ -108,8 +108,10 @@ tasks {
     }
 
     listProductsReleases {
-        // In addition to `IC` (from `platformType`), we also want to verify against `IU`.
-        types.set(Arrays.asList(properties('platformType'), 'IU'))
+//        // In addition to `IC` (from `platformType`), we also want to verify against `IU`.
+//        types.set(Arrays.asList(properties('platformType'), 'IU'))
+        // Contrary to above, we want to speed up CI, so skip verification of `IU`.
+        types.set(Arrays.asList(properties('platformType')))
 
         // Only get the released versions.
         releaseChannels.set([Channel.RELEASE])
