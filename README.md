@@ -41,6 +41,9 @@ The [officially released versions of this plugin can be found on plugins.jetbrai
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/AnomalousUnderdog"><img src="https://avatars.githubusercontent.com/u/553006?v=4?s=100" width="100px;" alt="AnomalousUnderdog"/><br /><sub><b>AnomalousUnderdog</b></sub></a><br /><a href="#bug-AnomalousUnderdog" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/andersodt"><img src="https://avatars.githubusercontent.com/u/1243035?v=4?s=100" width="100px;" alt="Ryan Edward Andersen"/><br /><sub><b>Ryan Edward Andersen</b></sub></a><br /><a href="#bug-andersodt" title="Bug reports">🐛</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/sballance"><img src="https://avatars.githubusercontent.com/u/16885530?v=4?s=100" width="100px;" alt="sballance"/><br /><sub><b>sballance</b></sub></a><br /><a href="#maintenance-sballance" title="Maintenance">🚧</a></td>
+    </tr>
   </tbody>
 </table>
 
