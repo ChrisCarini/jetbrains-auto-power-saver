@@ -47,6 +47,9 @@ jobs:
         with:
           # this remove tools (actions/setup-java) that are needed; hence, disable.
           tool-cache: false
+          # this removes docker images that are needed, like the one that is built at the beginning of the workflow run
+          # for the below action (ChrisCarini/intellij-platform-plugin-verifier-action@latest); hence, disable.
+          docker-images: false
 
       - name: Verify plugin on IntelliJ Platforms
         id: verify
