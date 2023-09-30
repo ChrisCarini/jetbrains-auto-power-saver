@@ -43,12 +43,13 @@ jobs:
       # https://github.com/actions/runner-images/issues/2840#issuecomment-790492173
       # https://github.com/jlumbroso/free-disk-space
       - name: Free Disk Space (Ubuntu)
-        # TODO: revert to jlumbroso/free-disk-space once jlumbroso/free-disk-space#8 is merged and released.
-#        uses: jlumbroso/free-disk-space@76866dbe54312617f00798d1762df7f43def6e5c # v1.2.0
-        uses: kfir4444/free-disk-space@0f2cc361875b00eaca290d19f2176e58c664fb02 # latest as of 2023-08-19
+        uses: jlumbroso/free-disk-space@f68fdb76e2ea636224182cfb7377ff9a1708f9b8 # v1.3.0
         with:
           # this remove tools (actions/setup-java) that are needed; hence, disable.
           tool-cache: false
+          # this removes docker images that are needed, like the one that is built at the beginning of the workflow run
+          # for the below action (ChrisCarini/intellij-platform-plugin-verifier-action@latest); hence, disable.
+          docker-images: false
 
       - name: Verify plugin on IntelliJ Platforms
         id: verify
