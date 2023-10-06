@@ -9,14 +9,11 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <applicationService
-            serviceImplementation="com.chriscarini.jetbrains.autopowersaver.FocusPowerSaveService"
-            preload="true"/>
+        serviceImplementation="com.chriscarini.jetbrains.autopowersaver.FocusPowerSaveService"/>
     <applicationService
-            serviceImplementation="com.chriscarini.jetbrains.autopowersaver.settings.SettingsManager"
-            preload="true"/>
+        serviceImplementation="com.chriscarini.jetbrains.autopowersaver.settings.SettingsManager"/>
     <applicationConfigurable
         instance="com.chriscarini.jetbrains.autopowersaver.settings.SettingsConfigurable"/>
-
 
     <!-- We register this to allow basic stats on how many times this plugin helped the user -->
     <productivityFeaturesProvider
