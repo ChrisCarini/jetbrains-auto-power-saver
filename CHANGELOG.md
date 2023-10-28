@@ -7,7 +7,6 @@
 ### Added
 
 ### Changed
-- Upgrading IntelliJ from 2023.2.3 to 2023.2.4
 
 ### Deprecated
 
@@ -16,6 +15,11 @@
 ### Fixed
 
 ### Security
+
+## [3.1.4] - 2023-10-28
+
+### Changed
+- Upgrading IntelliJ from 2023.2.3 to 2023.2.4
 
 ## [3.1.3] - 2023-10-12
 
@@ -216,7 +220,8 @@ EOM)
 ### Added
 - Initial release.
 
-[Unreleased]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v3.1.3...HEAD
+[Unreleased]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v3.1.4...HEAD
+[3.1.4]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v3.1.3...v3.1.4
 [3.1.3]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v3.1.2...v3.1.3
 [3.1.2]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v3.1.1...v3.1.2
 [3.1.1]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v3.1.0...v3.1.1
