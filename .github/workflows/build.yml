@@ -3,7 +3,7 @@
 # - run test and verifyPlugin tasks,
 # - run buildPlugin task and prepare artifact for the further tests,
 # - run IntelliJ Plugin Verifier,
-# - create a draft release.
+# - create a release.
 #
 # Workflow is triggered on push and pull_request events.
 #
@@ -149,10 +149,10 @@ jobs:
           name: "${{ steps.properties.outputs.name }} - ${{ steps.properties.outputs.version }}"
           path: ./build/distributions/*
 
-  # Prepare a draft release for GitHub Releases page for the manual verification
-  # If accepted and published, release workflow would be triggered
-  releaseDraft:
-    name: Release Draft
+  # Prepare a release for GitHub Releases page
+  # Once (automatically) published, release workflow will be triggered
+  release:
+    name: Release
     # If the event is *not* a PR, and there are no changes in the changelog or there are changes in more than just the changelog, we want to run this job.
     if: github.event_name != 'pull_request' && needs.files-changed.outputs.SKIP_CI == 'false'
     needs: [ build, files-changed ]
@@ -172,13 +172,25 @@ jobs:
             --jq '.[] | select(.draft == true) | .id' \
             | xargs -I '{}' gh api -X DELETE repos/{owner}/{repo}/releases/{}
 
-      # Create new release draft - which is not publicly visible and requires manual acceptance
-      - name: Create Release Draft
+      # Get latest release version
+      - name: Get latest release version
+        id: properties
+        shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          VERSION="$(gh api repos/{owner}/{repo}/releases --jq 'select(.[].draft == false) | first | .tag_name' | uniq | sed 's/v\(.*\)/\1/')"
+          echo "latest_release_version=$VERSION" | tee -a $GITHUB_OUTPUT
+
+      # Create new release
+      - name: Create & Publish Release
+        # If the currently released (to GitHub) version differs from the current version that was just built, create and publish a new release
+        if: steps.properties.outputs.latest_release_version != needs.build.outputs.version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Latest Released Version: [${{ steps.properties.outputs.latest_release_version }}] != Current Build Version: [${{ needs.build.outputs.version }}]"
           gh release create v${{ needs.build.outputs.version }} \
-            --draft \
             --title "v${{ needs.build.outputs.version }}" \
             --notes "$(cat << 'EOM'
           ${{ needs.build.outputs.changelog }}
