@@ -35,6 +35,14 @@ repositories {
     mavenCentral()
 }
 
+idea {
+    project {
+        // Set default IntelliJ SDK & language level to the version specified in `gradle.properties`
+        jdkName = properties("javaVersion")
+        languageLevel = properties("javaVersion")
+    }
+}
+
 intellij {
     pluginName.set(properties("pluginName"))
     version.set(properties("platformVersion"))
