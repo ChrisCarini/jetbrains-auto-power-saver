@@ -187,7 +187,7 @@ jobs:
         # If the currently released (to GitHub) version differs from the current version that was just built, create and publish a new release
         if: steps.properties.outputs.latest_release_version != needs.build.outputs.version
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN_FOR_IJ_UPDATE_ACTION }}
         run: |
           echo "Latest Released Version: [${{ steps.properties.outputs.latest_release_version }}] != Current Build Version: [${{ needs.build.outputs.version }}]"
           gh release create v${{ needs.build.outputs.version }} \
