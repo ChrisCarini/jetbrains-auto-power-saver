@@ -7,6 +7,11 @@
        on how to target different products -->
   <depends>com.intellij.modules.platform</depends>
 
+  <applicationListeners>
+    <listener class="com.chriscarini.jetbrains.autopowersaver.IdeFrameStatePowerSaveListener"
+              topic="com.intellij.openapi.application.ApplicationActivationListener"/>
+  </applicationListeners>
+
   <extensions defaultExtensionNs="com.intellij">
     <applicationService
         serviceImplementation="com.chriscarini.jetbrains.autopowersaver.FocusPowerSaveService"/>
