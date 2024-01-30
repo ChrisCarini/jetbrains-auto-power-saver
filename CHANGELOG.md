@@ -7,12 +7,14 @@
 ### Added
 
 ### Changed
+- Upgrading IntelliJ from 2023.3.2 to 2023.3.3
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- Fixed bug where plugin would not properly load application listener upon start-up, causing the plugin to not work. _(**bug:** #248 & **fix:** #273)_
 
 ### Security
 
