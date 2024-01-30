@@ -175,6 +175,15 @@
       "contributions": [
         "maintenance"
       ]
+    },
+    {
+      "login": "nilsbunger",
+      "name": "Nils Bunger",
+      "avatar_url": "https://avatars.githubusercontent.com/u/833720?v=4",
+      "profile": "https://www.linkedin.com/in/nilsbunger/",
+      "contributions": [
+        "bug"
+      ]
     }
   ]
 }
