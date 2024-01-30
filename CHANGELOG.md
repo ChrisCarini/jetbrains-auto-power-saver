@@ -7,16 +7,22 @@
 ### Added
 
 ### Changed
-- Upgrading IntelliJ from 2023.3.2 to 2023.3.3
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
-- Fixed bug where plugin would not properly load application listener upon start-up, causing the plugin to not work. _(**bug:** #248 & **fix:** #273)_
 
 ### Security
+
+## [3.2.3] - 2024-01-30
+
+### Changed
+- Upgrading IntelliJ from 2023.3.2 to 2023.3.3
+
+### Fixed
+- Fixed bug where plugin would not properly load application listener upon start-up, causing the plugin to not work. _(**bug:** #248 & **fix:** #273)_
 
 ## [3.2.2] - 2023-12-21
 
@@ -242,7 +248,8 @@ EOM)
 ### Added
 - Initial release.
 
-[Unreleased]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v3.2.2...HEAD
+[Unreleased]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v3.2.3...HEAD
+[3.2.3]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v3.2.2...v3.2.3
 [3.2.2]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v3.2.1...v3.2.2
 [3.2.1]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v3.2.0...v3.2.1
 [3.2.0]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v3.1.5...v3.2.0
