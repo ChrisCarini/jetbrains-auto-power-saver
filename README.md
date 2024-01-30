@@ -45,6 +45,7 @@ The [officially released versions of this plugin can be found on plugins.jetbrai
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/sballance"><img src="https://avatars.githubusercontent.com/u/16885530?v=4?s=100" width="100px;" alt="sballance"/><br /><sub><b>sballance</b></sub></a><br /><a href="#maintenance-sballance" title="Maintenance">🚧</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://finiv.in.ua"><img src="https://avatars.githubusercontent.com/u/3448603?v=4?s=100" width="100px;" alt="Yurij Finiv"/><br /><sub><b>Yurij Finiv</b></sub></a><br /><a href="#bug-CrazyBoy49z" title="Bug reports">🐛</a> <a href="#maintenance-CrazyBoy49z" title="Maintenance">🚧</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ristomatti"><img src="https://avatars.githubusercontent.com/u/9029939?v=4?s=100" width="100px;" alt="Ristomatti Airo"/><br /><sub><b>Ristomatti Airo</b></sub></a><br /><a href="#maintenance-ristomatti" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/nilsbunger/"><img src="https://avatars.githubusercontent.com/u/833720?v=4?s=100" width="100px;" alt="Nils Bunger"/><br /><sub><b>Nils Bunger</b></sub></a><br /><a href="#bug-nilsbunger" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
