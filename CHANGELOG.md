@@ -14,6 +14,7 @@
 ### Removed
 
 ### Fixed
+- Fixed bug where plugin would not properly load application listener upon start-up, causing the plugin to not work. _(**bug:** #248 & **fix:** #273)_
 
 ### Security
 
