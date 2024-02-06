@@ -37,7 +37,7 @@ jobs:
 
       # Validate wrapper
       - name: Gradle Wrapper Validation
-        uses: gradle/wrapper-validation-action@27152f6fa06a6b8062ef7195c795692e51fc2c81 # v2.0.0
+        uses: gradle/wrapper-validation-action@56b90f209b02bf6d1deae490e9ef18b21a389cd4 # v1.1.0
 
   # Run verifyPlugin and test Gradle tasks
   test:
@@ -144,7 +144,7 @@ jobs:
 
       # Store built plugin as an artifact for downloading
       - name: Upload artifacts
-        uses: actions/upload-artifact@26f96dfa697d77e81fd5907df203aa23a56210a8 # v4.3.0
+        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
         with:
           name: "${{ steps.properties.outputs.name }} - ${{ steps.properties.outputs.version }}"
           path: ./build/distributions/*
