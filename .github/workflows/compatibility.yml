@@ -48,14 +48,15 @@ jobs:
 # Ref: https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
 #      # https://github.com/actions/runner-images/issues/2840#issuecomment-790492173
 #      # https://github.com/jlumbroso/free-disk-space
-#      - name: Free Disk Space (Ubuntu)
-#        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
-#        with:
-#          # this remove tools (actions/setup-java) that are needed; hence, disable.
-#          tool-cache: false
-#          # this removes docker images that are needed, like the one that is built at the beginning of the workflow run
-#          # for the below action (ChrisCarini/intellij-platform-plugin-verifier-action@latest); hence, disable.
-#          docker-images: false
+# NOTE: Tried removing this on 2024-02-08, but ran out of diskspace on the 2023.3.4 upgrade PRs. Re-enabling.
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
+        with:
+          # this remove tools (actions/setup-java) that are needed; hence, disable.
+          tool-cache: false
+          # this removes docker images that are needed, like the one that is built at the beginning of the workflow run
+          # for the below action (ChrisCarini/intellij-platform-plugin-verifier-action@latest); hence, disable.
+          docker-images: false
 
       - name: Verify plugin on IntelliJ Platforms
         id: verify
