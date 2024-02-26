@@ -110,6 +110,8 @@ tasks {
                                 .collect(Collectors.joining('\n'))
                 )
         )
+        sinceBuild.set(properties('pluginSinceBuild'))
+        untilBuild.set(properties('pluginUntilBuild'))
 
         def changeLogForVersion = changelog.getOrNull(properties("pluginVersion"))
         changeNotes.set((changeLogForVersion != null ? changeLogForVersion : changelog.getLatest()).toHTML())
