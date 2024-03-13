@@ -7,6 +7,7 @@
 ### Added
 
 ### Changed
+- Upgrading IntelliJ from 2023.3.5 to 2024.1-EAP #294
 
 ### Deprecated
 
