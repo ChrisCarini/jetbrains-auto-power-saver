@@ -123,8 +123,9 @@ tasks {
         // Contrary to above, we want to speed up CI, so skip verification of `IU`.
         types.set(Arrays.asList(properties('platformType')))
 
-        // Only get the released versions.
-        releaseChannels.set([Channel.RELEASE])
+        // Only get the released versions if we are not targeting an EAP.
+        def isEAP = properties("pluginVersion").endsWith('-EAP')
+        releaseChannels.set([isEAP ? Channel.EAP : Channel.RELEASE])
 
         // Verify against the most recent patch release of the `platformVersion` version
         // (ie, if `platformVersion` = 2022.2, and the latest patch release is `2022.2.2`,
