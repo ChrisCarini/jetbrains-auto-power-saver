@@ -18,6 +18,7 @@ jobs:
       - name: Update Gradle Wrapper
         uses: gradle-update/update-gradle-wrapper-action@0407394b9d173dfc9cf5695f9f560fef6d61a5fe # v1.0.20
         with:
+          repo-token: ${{ secrets.GH_PAT_REPO_SCOPE_FOR_ACTIONS_THAT_OPEN_PRS }}
           merge-method: SQUASH
           reviewers: |
             ChrisCarini
