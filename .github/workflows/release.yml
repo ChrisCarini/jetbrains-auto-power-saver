@@ -69,7 +69,7 @@ jobs:
       - name: Create Pull Request
         if: ${{ steps.properties.outputs.changelog != '' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT_REPO_SCOPE_FOR_ACTIONS_THAT_OPEN_PRS }}
         run: |
           VERSION="${{ github.event.release.tag_name }}"
           BRANCH="changelog-update-$VERSION"
@@ -92,21 +92,13 @@ jobs:
           # Unquoted heredoc to allow for variable expansion for $VERSION; see https://stackoverflow.com/a/4938198
           PR_BODY="$(cat <<-EOM | sed -e $SED_PROG1 -e $SED_PROG2
           Current pull request contains patched \`CHANGELOG.md\` file for the \`$VERSION\` version.
-
-          ## ⚠️🛑⚠️🛑 **WARNING** 🛑⚠️🛑⚠️
-          
-          Because the default \`GITHUB_TOKEN\` is used to generate **this** PR from **within** a workflow, no checks will be run. Follow the below steps to have checks run as desired.
-          
-          ### Steps
-          1. Click "Close pull request" on this PR
-          2. Click "Reopen pull request" on this PR
-          3. Approve this PR\'s changes
           EOM
           )"
           
           gh pr create \
             --title "Changelog update - \`$VERSION\`" \
             --body "$PR_BODY" \
+            --reviewer ChrisCarini \
             --base main \
             --label "merge when passing" \
             --head $BRANCH
