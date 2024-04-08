@@ -256,7 +256,7 @@ dependencies {
     }
 
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
-    testImplementation 'org.testng:testng:7.9.0'
+    testImplementation 'org.testng:testng:7.10.0'
     testImplementation 'org.mockito:mockito-core:5.11.0'
 }
 
