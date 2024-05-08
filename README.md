@@ -48,6 +48,7 @@ The [officially released versions of this plugin can be found on plugins.jetbrai
       <td align="center" valign="top" width="14.28%"><a href="http://hryvinskyi.com"><img src="https://avatars.githubusercontent.com/u/9294098?v=4?s=100" width="100px;" alt="Volodymyr Hryvinskyi"/><br /><sub><b>Volodymyr Hryvinskyi</b></sub></a><br /><a href="#bug-hryvinskyi" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/nilsbunger/"><img src="https://avatars.githubusercontent.com/u/833720?v=4?s=100" width="100px;" alt="Nils Bunger"/><br /><sub><b>Nils Bunger</b></sub></a><br /><a href="#bug-nilsbunger" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ryans233"><img src="https://avatars.githubusercontent.com/u/2986572?v=4?s=100" width="100px;" alt="Ryan Wu"/><br /><sub><b>Ryan Wu</b></sub></a><br /><a href="#bug-ryans233" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/rvoitenko"><img src="https://avatars.githubusercontent.com/u/1759348?v=4?s=100" width="100px;" alt="Roman Voitenko"/><br /><sub><b>Roman Voitenko</b></sub></a><br /><a href="#bug-rvoitenko" title="Bug reports">🐛</a> <a href="#research-rvoitenko" title="Research">🔬</a> <a href="#userTesting-rvoitenko" title="User Testing">📓</a></td>
     </tr>
   </tbody>
 </table>
