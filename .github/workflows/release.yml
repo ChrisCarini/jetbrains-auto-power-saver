@@ -81,23 +81,9 @@ jobs:
           git commit -am "Changelog update - $VERSION"
           git push --set-upstream origin $BRANCH
           
-          # NOTE: THE BELOW PR DESCRIPTION IS TO GIVE DETAILS ON A WORKAROUND FOR A WORKFLOW-CREATED PR TO TRIGGER 
-          #       SUBSEQUENT WORKFLOWS. SEE LINK BELOW FOR MORE DETAILS AND OTHER ALTERNATIVES:
-          #       
-          #       URL: https://github.com/peter-evans/create-pull-request/blob/main/docs/concepts-guidelines.md#workarounds-to-trigger-further-workflow-runs
-          #
-          # Moving sed prog into variables; see https://stackoverflow.com/a/25021905
-          SED_PROG1='s/^[[:space:]]*$//g'
-          SED_PROG2='/./,$!d'
-          # Unquoted heredoc to allow for variable expansion for $VERSION; see https://stackoverflow.com/a/4938198
-          PR_BODY="$(cat <<-EOM | sed -e $SED_PROG1 -e $SED_PROG2
-          Current pull request contains patched \`CHANGELOG.md\` file for the \`$VERSION\` version.
-          EOM
-          )"
-          
           gh pr create \
             --title "Changelog update - \`$VERSION\`" \
-            --body "$PR_BODY" \
+            --body "Current pull request contains patched \`CHANGELOG.md\` file for the \`$VERSION\` version." \
             --reviewer ChrisCarini \
             --base main \
             --label "merge when passing" \
