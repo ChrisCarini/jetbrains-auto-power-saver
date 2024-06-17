@@ -15,7 +15,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.17.3'
+        classpath 'org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.17.4'
         classpath 'org.jetbrains.changelog:org.jetbrains.changelog.gradle.plugin:2.1.0'
         classpath 'org.jetbrains.qodana:gradle-qodana-plugin:0.1.13'
         classpath 'com.dorongold.plugins:task-tree:4.0.0' // provides `taskTree` task (e.g. `./gradlew build taskTree`; docs: https://github.com/dorongold/gradle-task-tree)
