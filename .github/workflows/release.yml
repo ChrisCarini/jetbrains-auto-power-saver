@@ -86,5 +86,8 @@ jobs:
             --body "Current pull request contains patched \`CHANGELOG.md\` file for the \`$VERSION\` version." \
             --reviewer ChrisCarini \
             --base main \
-            --label "merge when passing" \
             --head $BRANCH
+          
+          gh pr merge \
+            --auto \
+            --squash
