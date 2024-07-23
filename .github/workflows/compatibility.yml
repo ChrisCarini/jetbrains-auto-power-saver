@@ -60,7 +60,7 @@ jobs:
 
       - name: Verify plugin on IntelliJ Platforms
         id: verify
-        uses: ChrisCarini/intellij-platform-plugin-verifier-action@ChrisCarini/curl_with_retry
+        uses: ChrisCarini/intellij-platform-plugin-verifier-action@latest
         with:
           # Generated from the `generateIdeVersionsList` task above.
           ide-versions: build/intellij-platform-plugin-verifier-action-ide-versions-file.txt
