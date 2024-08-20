@@ -54,13 +54,13 @@ jobs:
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         timeout-minutes: 1
 
-      # Setup Java 17 environment for the next steps
-      - name: Setup Java 17
+      # Setup Java environment for the next steps
+      - name: Setup Java
         uses: actions/setup-java@6a0805fcefea3d4657a47ac4c165951e33482018 # v4.2.2
         timeout-minutes: 5
         with:
           distribution: zulu
-          java-version: 17
+          java-version: 21
           cache: gradle
 
       # Set environment variables
@@ -97,7 +97,7 @@ jobs:
 
       # Run IntelliJ Plugin Verifier action using GitHub Action
       - name: Run Plugin Verifier
-        run: ./gradlew runPluginVerifier -Pplugin.verifier.home.dir=${{ steps.properties.outputs.pluginVerifierHomeDir }}
+        run: ./gradlew verifyPlugin -Pplugin.verifier.home.dir=${{ steps.properties.outputs.pluginVerifierHomeDir }}
 
   # Build plugin with buildPlugin Gradle task and provide the artifact for the next workflow jobs
   # Requires test job to be passed
@@ -117,13 +117,13 @@ jobs:
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         timeout-minutes: 1
 
-      # Setup Java 17 environment for the next steps
-      - name: Setup Java 17
+      # Setup Java environment for the next steps
+      - name: Setup Java
         uses: actions/setup-java@6a0805fcefea3d4657a47ac4c165951e33482018 # v4.2.2
         timeout-minutes: 5
         with:
           distribution: zulu
-          java-version: 17
+          java-version: 21
           cache: gradle
 
       # Set environment variables
