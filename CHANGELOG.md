@@ -8,6 +8,7 @@
 
 ### Changed
 - Upgrading IntelliJ from 2024.1.5 to 2024.2.0
+- Changed gradle build to Kotlin DSL (from Groovy DSL) in preparation of `IntelliJ Platform Gradle Plugin 2.0.0`.
 
 ### Deprecated
 
