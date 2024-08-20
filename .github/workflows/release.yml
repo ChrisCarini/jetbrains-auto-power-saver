@@ -22,13 +22,13 @@ jobs:
         with:
           ref: ${{ github.event.release.tag_name }}
 
-      # Setup Java 17 environment for the next steps
-      - name: Setup Java 17
+      # Setup Java environment for the next steps
+      - name: Setup Java
         uses: actions/setup-java@6a0805fcefea3d4657a47ac4c165951e33482018 # v4.2.2
         timeout-minutes: 5
         with:
           distribution: zulu
-          java-version: 17
+          java-version: 21
           cache: gradle
 
       # Set environment variables
