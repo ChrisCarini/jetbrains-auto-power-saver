@@ -31,9 +31,9 @@ val shouldPublishPlugin = properties("publishPlugin").equals("true")
 plugins {
     id("java")
     id("idea")
-    id("org.jetbrains.intellij.platform") //version "2.0.0"
-    id("org.jetbrains.changelog") //version "2.2.1"
-    id("com.dorongold.task-tree") //version "3.0.0" // provides `taskTree` task (e.g. `./gradlew build taskTree`; docs: https://github.com/dorongold/gradle-task-tree)
+    id("org.jetbrains.intellij.platform")
+    id("org.jetbrains.changelog")
+    id("com.dorongold.task-tree")
 }
 
 group = pluginGroup
