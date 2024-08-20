@@ -234,7 +234,8 @@ changelog {
 tasks {
     publishPlugin {
         dependsOn(patchChangelog)
-        enabled = shouldPublishPlugin && providers.provider { pluginRepositoryUrl }.getOrElse("false") == "true"
+        logger.lifecycle("Should Publish Plugin?: $shouldPublishPlugin")
+        enabled = shouldPublishPlugin
     }
 
     printProductsReleases {
