@@ -64,6 +64,12 @@ jobs:
         with:
           # Generated from the `generateIdeVersionsList` task above.
           ide-versions: build/intellij-platform-plugin-verifier-action-ide-versions-file.txt
+          # TODO(ChrisCarini) - This can be removed once https://youtrack.jetbrains.com/issue/MP-6711 is resolved.
+          #  See below for details:
+          #       - https://jetbrains-platform.slack.com/archives/C012S7PA8CQ/p1722334099316129?thread_ts=1719921236.855369&cid=C012S7PA8CQ
+          #       - https://youtrack.jetbrains.com/issue/MP-6711/Plugin-Verifier-Muted-plugin-problems-show-up-in-the-standard-output-as-structure-warnings#focus=Comments-27-10232348.0-0
+          failure-levels: |
+            PLUGIN_STRUCTURE_WARNINGS
 
       - name: Get log file path and print contents
         run: |
