@@ -7,7 +7,6 @@
 ### Added
 
 ### Changed
-- Upgrading IntelliJ from 2024.2.2 to 2024.2.3
 
 ### Deprecated
 
@@ -16,6 +15,12 @@
 ### Fixed
 
 ### Security
+
+## [4.1.3] - 2024-09-26
+
+### Changed
+
+- Upgrading IntelliJ from 2024.2.2 to 2024.2.3
 
 ## [4.1.2] - 2024-09-22
 
@@ -368,7 +373,8 @@ EOM)
 
 - Initial release.
 
-[Unreleased]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v4.1.2...HEAD
+[Unreleased]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v4.1.3...HEAD
+[4.1.3]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v4.1.2...v4.1.3
 [4.1.2]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v4.1.1...v4.1.2
 [4.1.1]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v4.1.0...v4.1.1
 [4.1.0]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v4.0.5...v4.1.0
