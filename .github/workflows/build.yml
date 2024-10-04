@@ -76,7 +76,7 @@ jobs:
 
       # Cache Plugin Verifier IDEs
       - name: Setup Plugin Verifier IDEs Cache
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 # v4.1.0
         with:
           path: ${{ steps.properties.outputs.pluginVerifierHomeDir }}/ides
           key: ${{ runner.os }}-plugin-verifier-${{ steps.properties.outputs.ideVersions }}
