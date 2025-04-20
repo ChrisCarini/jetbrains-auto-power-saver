@@ -16,7 +16,7 @@ jobs:
         timeout-minutes: 1
 
       - name: Setup Java
-        uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4.6.0
+        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
         timeout-minutes: 5
         with:
           distribution: zulu
@@ -24,7 +24,7 @@ jobs:
           cache: gradle
 
       - name: Update Gradle Wrapper
-        uses: gradle-update/update-gradle-wrapper-action@9268373d69bd0974b6318eb3b512b8e025060bbe # v2.0.0
+        uses: gradle-update/update-gradle-wrapper-action@512b1875f3b6270828abfe77b247d5895a2da1e5 # v2.1.0
         with:
           repo-token: ${{ secrets.GH_PAT_REPO_SCOPE_FOR_ACTIONS_THAT_OPEN_PRS }}
           merge-method: SQUASH
