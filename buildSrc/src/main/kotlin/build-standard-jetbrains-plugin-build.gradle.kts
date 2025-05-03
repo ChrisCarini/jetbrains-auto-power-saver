@@ -70,8 +70,6 @@ dependencies {
         // Plugin Dependencies. Uses `platformBundledPlugins` property from the gradle.properties file for bundled IntelliJ Platform plugins.
         bundledPlugins(platformBundledPlugins.map { it.split(',') })
 
-        instrumentationTools()
-
         // `jetbrainsRuntime()` is necessary mostly for EAP/SNAPSHOT releases of IJ so that the IDE pulls the correct JBR
         //      - https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-jetbrains-runtime.html#obtained-with-intellij-platform-from-maven
         if (isSnapshot) {
