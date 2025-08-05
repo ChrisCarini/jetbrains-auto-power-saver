@@ -8,13 +8,9 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    reviewers:
-      - ChrisCarini
 
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
-    reviewers:
-      - ChrisCarini
