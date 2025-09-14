@@ -29,7 +29,12 @@ jobs:
         with:
           distribution: zulu
           java-version: 21
-          cache: gradle
+
+      # Setup Gradle
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@017a9effdb900e5b5b2fddfb590a105619dca3c3 # v4.4.2
+        with:
+          validate-wrappers: true  # default value, defining for explicitness.
 
       # Set environment variables
       - name: Export Properties

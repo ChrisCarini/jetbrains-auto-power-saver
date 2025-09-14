@@ -62,8 +62,11 @@ dependencies {
         create(
             type = IntelliJPlatformType.fromCode(platformType),
             version = platformVersion,
+        ) {
+            // `useInstaller` needs to be set to 'false' (aka, `isSnapshot` = 'true') to resolve EAP releases.
             useInstaller = !isSnapshot
-        )
+            useCache = true
+        }
 
         // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file for plugin from JetBrains Marketplace.
         plugins(platformPlugins.map { it.split(',') })
@@ -217,7 +220,9 @@ intellijPlatform {
         failureLevel.set(failureLevels)
         ides {
             logger.lifecycle("Verifying against IntelliJ Platform $platformType $platformVersion")
-            ide(IntelliJPlatformType.fromCode(platformType), platformVersion)
+            create(IntelliJPlatformType.fromCode(platformType), platformVersion) {
+                useCache = true
+            }
 
             recommended()
         }
@@ -279,7 +284,7 @@ tasks {
     }
 
     // Task to generate the necessary format for `ChrisCarini/intellij-platform-plugin-verifier-action` GitHub Action.
-    register("generateIdeVersionsList") {
+    register<DefaultTask>("generateIdeVersionsList") {
         dependsOn(project.tasks.named(listProductReleasesTaskName))
         doLast {
             val ideVersionsList = mutableListOf<String>()
@@ -290,8 +295,16 @@ tasks {
             }
 
             // Include the versions specified in `gradle.properties` `pluginVerifierIdeVersions` property.
+            val environment: String = environment("GITHUB_EVENT_NAME").getOrElse("__")
             pluginVerifierIdeVersions.split(",").map { it.trim() }.forEach { version ->
-                listOf("IC", "IU").forEach { type ->
+                // Only add 'LATEST-EAP-SNAPSHOT' during scheduled runs.
+                if ("LATEST-EAP-SNAPSHOT".equals(version) && !"schedule".equals(environment)) {
+                    return@forEach
+                }
+
+                // Note: Used to test against both IC & IU, but now defaulting to just whatever is specified
+                // by `platformType` in the `gradle.properties` file.
+                listOf(platformType).forEach { type ->
                     ideVersionsList.add("idea$type:$version")
                 }
             }
