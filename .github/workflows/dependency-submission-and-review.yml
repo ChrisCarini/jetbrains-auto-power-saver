@@ -1,0 +1,47 @@
+# Taken on 2025-08-30 from: https://github.com/gradle/actions/blob/main/docs/dependency-submission.md#general-usage
+name: 'Dependency Submission & Review'
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  dependency-submission-and-review:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out current repository
+      - name: Fetch Sources
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        timeout-minutes: 1
+
+      # Setup Java
+      - name: Setup Java
+        uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0
+        timeout-minutes: 5
+        with:
+          distribution: zulu
+          java-version: 21
+
+      # Generate and submit dependency graph
+      - name: Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@ed408507eac070d1f99cc633dbcf757c94c7933a # v4.4.3
+        with:
+          # Reducing storage costs for saved dependency graph artifacts (store for 1 day instead of 30 days)
+          # See: https://github.com/gradle/actions/blob/main/docs/dependency-submission.md#reducing-storage-costs-for-saved-dependency-graph-artifacts
+          artifact-retention-days: 1 # Default is 30 days or as configured for repository
+
+          # Publishing a Develocity Build Scan® from your dependency submission workflow
+          # Why: A Build Scan makes it easy to determine the source of any dependency vulnerabilities in your project.
+          # See: https://github.com/gradle/actions/blob/main/docs/dependency-submission.md#publishing-a-develocity-build-scan-from-your-dependency-submission-workflow
+          build-scan-publish: true
+          build-scan-terms-of-use-url: "https://gradle.com/help/legal-terms-of-use"
+          build-scan-terms-of-use-agree: "yes"
+
+      # Dependency Review (on PR only)
+      - name: Dependency Review
+        if: github.event_name == 'pull_request'
+        uses: actions/dependency-review-action@595b5aeba73380359d98a5e087f648dbb0edce1b # v4.7.3
