@@ -28,7 +28,7 @@ jobs:
 
       # Generate and submit dependency graph
       - name: Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@ed408507eac070d1f99cc633dbcf757c94c7933a # v4.4.3
+        uses: gradle/actions/dependency-submission@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5.0.0
         with:
           # Reducing storage costs for saved dependency graph artifacts (store for 1 day instead of 30 days)
           # See: https://github.com/gradle/actions/blob/main/docs/dependency-submission.md#reducing-storage-costs-for-saved-dependency-graph-artifacts
@@ -44,4 +44,4 @@ jobs:
       # Dependency Review (on PR only)
       - name: Dependency Review
         if: github.event_name == 'pull_request'
-        uses: actions/dependency-review-action@595b5aeba73380359d98a5e087f648dbb0edce1b # v4.7.3
+        uses: actions/dependency-review-action@56339e523c0409420f6c2c9a2f4292bbb3c07dd3 # v4.8.0
