@@ -7,7 +7,6 @@
 ### Added
 
 ### Changed
-- Upgrading IntelliJ from 2025.2.2 to 2025.2.3
 
 ### Deprecated
 
@@ -16,6 +15,12 @@
 ### Fixed
 
 ### Security
+
+## [5.1.3] - 2025-10-03
+
+### Changed
+
+- Upgrading IntelliJ from 2025.2.2 to 2025.2.3
 
 ## [5.1.2] - 2025-09-20
 
@@ -477,7 +482,8 @@ EOM)
 
 - Initial release.
 
-[Unreleased]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v5.1.2...HEAD
+[Unreleased]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v5.1.3...HEAD
+[5.1.3]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v5.1.2...v5.1.3
 [5.1.2]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v5.1.1...v5.1.2
 [5.1.1]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v5.1.0...v5.1.1
 [5.1.0]: https://github.com/ChrisCarini/jetbrains-auto-power-saver/compare/v5.0.3...v5.1.0
