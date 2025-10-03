@@ -88,7 +88,7 @@ dependencies {
         testFramework(TestFrameworkType.Platform)
     }
 
-    testImplementation(group = "junit", name = "junit", version = "4.13.2")
+    testImplementation("junit:junit:4.13.2")
     testImplementation("org.testng:testng:7.10.2")
     testImplementation("org.mockito:mockito-core:5.12.0")
 }
