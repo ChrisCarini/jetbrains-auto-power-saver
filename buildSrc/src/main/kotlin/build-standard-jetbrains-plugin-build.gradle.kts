@@ -60,7 +60,12 @@ dependencies {
     intellijPlatform {
         val isSnapshot = platformVersion.endsWith("-SNAPSHOT")
         create(
-            type = IntelliJPlatformType.fromCode(platformType),
+            // Specify both `platformType` and `platformVersion` to correctly "distinguish between IntelliJ IDEA and
+            // IntelliJ IDEA Ultimate when parsing IU code". This can likely be removed after all plugins updated to
+            // 2025.3.* RELEASE. See below commit & method impl for details:
+            // - https://github.com/JetBrains/intellij-platform-gradle-plugin/commit/79f8625f6411ca9cacb3b7db32cbcde7a159e1ad
+            // - https://github.com/JetBrains/intellij-platform-gradle-plugin/blob/4abe312ff252b9f013451d82844ef4cc9dcc0807/src/main/kotlin/org/jetbrains/intellij/platform/gradle/IntelliJPlatformType.kt#L151-L197
+            type = IntelliJPlatformType.fromCode(platformType, platformVersion),
             version = platformVersion,
         ) {
             // `useInstaller` needs to be set to 'false' (aka, `isSnapshot` = 'true') to resolve EAP releases.
@@ -83,7 +88,7 @@ dependencies {
         testFramework(TestFrameworkType.Platform)
     }
 
-    testImplementation(group = "junit", name = "junit", version = "4.13.2")
+    testImplementation("junit:junit:4.13.2")
     testImplementation("org.testng:testng:7.10.2")
     testImplementation("org.mockito:mockito-core:5.12.0")
 }
@@ -220,7 +225,15 @@ intellijPlatform {
         failureLevel.set(failureLevels)
         ides {
             logger.lifecycle("Verifying against IntelliJ Platform $platformType $platformVersion")
-            create(IntelliJPlatformType.fromCode(platformType), platformVersion) {
+            create(
+                // Specify both `platformType` and `platformVersion` to correctly "distinguish between IntelliJ IDEA and
+                // IntelliJ IDEA Ultimate when parsing IU code". This can likely be removed after all plugins updated to
+                // 2025.3.* RELEASE. See below commit & method impl for details:
+                // - https://github.com/JetBrains/intellij-platform-gradle-plugin/commit/79f8625f6411ca9cacb3b7db32cbcde7a159e1ad
+                // - https://github.com/JetBrains/intellij-platform-gradle-plugin/blob/4abe312ff252b9f013451d82844ef4cc9dcc0807/src/main/kotlin/org/jetbrains/intellij/platform/gradle/IntelliJPlatformType.kt#L151-L197
+                type = IntelliJPlatformType.fromCode(platformType, platformVersion),
+                version = platformVersion,
+            ) {
                 useCache = true
             }
 

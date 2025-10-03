@@ -21,6 +21,12 @@ on:
   # Trigger the workflow on any pull request
   pull_request:
 
+# The concurrency group is configured to run the workflow on the latest iteration of a PR
+# (and cancel workflows for older iterations).
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}-${{ github.base_ref }}
+  cancel-in-progress: true
+
 jobs:
   files-changed:
     uses: ./.github/workflows/files-changed.yaml
