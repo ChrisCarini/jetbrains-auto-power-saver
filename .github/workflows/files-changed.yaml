@@ -55,7 +55,7 @@ jobs:
       changed_files: ${{ steps.changes.outputs.changed_files }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         timeout-minutes: 1
 
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
