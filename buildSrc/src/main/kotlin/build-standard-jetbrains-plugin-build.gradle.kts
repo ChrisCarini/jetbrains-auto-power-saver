@@ -15,7 +15,6 @@ fun extra(key: String): String = project.ext.get(key) as String
 val javaVersion = properties("javaVersion")
 val platformBundledPlugins = providers.gradleProperty("platformBundledPlugins")
 val platformPlugins = providers.gradleProperty("platformPlugins")
-val platformType = properties("platformType")
 val platformVersion = properties("platformVersion")
 val pluginGroup = properties("pluginGroup")
 val pluginName = properties("pluginName")
@@ -60,12 +59,7 @@ dependencies {
     intellijPlatform {
         val isSnapshot = platformVersion.endsWith("-SNAPSHOT")
         create(
-            // Specify both `platformType` and `platformVersion` to correctly "distinguish between IntelliJ IDEA and
-            // IntelliJ IDEA Ultimate when parsing IU code". This can likely be removed after all plugins updated to
-            // 2025.3.* RELEASE. See below commit & method impl for details:
-            // - https://github.com/JetBrains/intellij-platform-gradle-plugin/commit/79f8625f6411ca9cacb3b7db32cbcde7a159e1ad
-            // - https://github.com/JetBrains/intellij-platform-gradle-plugin/blob/4abe312ff252b9f013451d82844ef4cc9dcc0807/src/main/kotlin/org/jetbrains/intellij/platform/gradle/IntelliJPlatformType.kt#L151-L197
-            type = IntelliJPlatformType.fromCode(platformType, platformVersion),
+            type = IntelliJPlatformType.IntellijIdea,
             version = platformVersion,
         ) {
             // `useInstaller` needs to be set to 'false' (aka, `isSnapshot` = 'true') to resolve EAP releases.
@@ -224,14 +218,9 @@ intellijPlatform {
         logger.debug("Using ${failureLevels.size} Failure Levels: $failureLevels")
         failureLevel.set(failureLevels)
         ides {
-            logger.lifecycle("Verifying against IntelliJ Platform $platformType $platformVersion")
+            logger.lifecycle("Verifying against IntelliJ $platformVersion")
             create(
-                // Specify both `platformType` and `platformVersion` to correctly "distinguish between IntelliJ IDEA and
-                // IntelliJ IDEA Ultimate when parsing IU code". This can likely be removed after all plugins updated to
-                // 2025.3.* RELEASE. See below commit & method impl for details:
-                // - https://github.com/JetBrains/intellij-platform-gradle-plugin/commit/79f8625f6411ca9cacb3b7db32cbcde7a159e1ad
-                // - https://github.com/JetBrains/intellij-platform-gradle-plugin/blob/4abe312ff252b9f013451d82844ef4cc9dcc0807/src/main/kotlin/org/jetbrains/intellij/platform/gradle/IntelliJPlatformType.kt#L151-L197
-                type = IntelliJPlatformType.fromCode(platformType, platformVersion),
+                type = IntelliJPlatformType.IntellijIdea,
                 version = platformVersion,
             ) {
                 useCache = true
@@ -255,10 +244,7 @@ tasks {
     }
 
     printProductsReleases {
-//        // In addition to `IC` (from `platformType`), we also want to verify against `IU`.
-//        types.set(Arrays.asList(platformType, "IU"))
-        // Contrary to above, we want to speed up CI, so skip verification of `IU`.
-        types = listOf(IntelliJPlatformType.fromCode(platformType))
+        types = listOf(IntelliJPlatformType.IntellijIdea)
 
         // Only get the released versions if we are not targeting an EAP.
         val isEAP = pluginVersion.uppercase().endsWith("-EAP")
@@ -280,30 +266,13 @@ tasks {
         }
     }
 
-    // In "IntelliJ Platform Gradle Plugin 2.*", the `listProductsReleases` task no longer exists, but
-    // instead the `printProductReleases` task does. This task is necessary to take the output of
-    // `printProductReleases` and write it to a file for use in the `generateIdeVersionsList` task below.
-    val listProductReleasesTaskName = "listProductsReleases"
-    register(listProductReleasesTaskName) {
-        dependsOn(printProductsReleases)
-        val outputF = layout.buildDirectory.file("listProductsReleases.txt").also {
-            outputs.file(it)
-        }
-        val content = printProductsReleases.flatMap { it.productsReleases }.map { it.joinToString("\n") }
-
-        doLast {
-            outputF.orNull?.asFile?.writeText(content.get())
-        }
-    }
-
     // Task to generate the necessary format for `ChrisCarini/intellij-platform-plugin-verifier-action` GitHub Action.
     register<DefaultTask>("generateIdeVersionsList") {
-        dependsOn(project.tasks.named(listProductReleasesTaskName))
         doLast {
             val ideVersionsList = mutableListOf<String>()
 
-            // Include the versions produced from the `listProductsReleases` task.
-            project.tasks.named(listProductReleasesTaskName).get().outputs.files.singleFile.forEachLine { line ->
+            // Include the versions produced from the `printProductsReleases` task.
+            printProductsReleases.flatMap { it.productsReleases }.map { it.joinToString("\n") }.get().split("\n").forEach { line ->
                 ideVersionsList.add("idea" + line.replace("-", ":"))
             }
 
@@ -315,11 +284,7 @@ tasks {
                     return@forEach
                 }
 
-                // Note: Used to test against both IC & IU, but now defaulting to just whatever is specified
-                // by `platformType` in the `gradle.properties` file.
-                listOf(platformType).forEach { type ->
-                    ideVersionsList.add("idea$type:$version")
-                }
+                ideVersionsList.add("ideaIU:$version")
             }
 
             // Write out file with unique pairs of type + version
