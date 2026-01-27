@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.intellij.platform:intellij-platform-gradle-plugin:2.10.5")
+    implementation("org.jetbrains.intellij.platform:intellij-platform-gradle-plugin:2.11.0")
     implementation("org.jetbrains.intellij.plugins:gradle-changelog-plugin:2.5.0")
     implementation("com.dorongold.plugins:task-tree:4.0.1") // provides `taskTree` task (e.g. `./gradlew build taskTree`; docs: https://github.com/dorongold/gradle-task-tree)
 }
