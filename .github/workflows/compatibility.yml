@@ -70,12 +70,8 @@ jobs:
 
       - name: Verify plugin on IntelliJ Platforms
         id: verify
-        uses: ChrisCarini/intellij-platform-plugin-verifier-action@latest
+        uses: ChrisCarini/intellij-platform-plugin-verifier-action@main  # use `main` to self-test latest changes; `latest` was previously used
         with:
-          # There is an issue with 1.384 where the verifier will `java.lang.OutOfMemoryError: Java heap space`; see below resources:
-          #   - https://platform.jetbrains.com/t/outofmemoryerror-during-plugin-verifier/1036/6
-          #   - https://youtrack.jetbrains.com/issue/MP-7366/Plugin-Verifier-1.384-OOM-when-checking-large-number-of-plugins#focus=Comments-27-11774230.0-0
-          verifier-version: '1.383'
           # Generated from the `generateIdeVersionsList` task above.
           ide-versions: build/intellij-platform-plugin-verifier-action-ide-versions-file.txt
           # TODO(ChrisCarini) - This can be removed once https://youtrack.jetbrains.com/issue/MP-6711 is resolved.
