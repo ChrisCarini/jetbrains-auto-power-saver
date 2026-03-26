@@ -7,6 +7,7 @@
 ### Added
 
 ### Changed
+- Upgrading IntelliJ from 2025.3.4 to 2026.1
 - Upgrading IntelliJ from 2025.3.3 to 2025.3.4
 
 ### Deprecated
