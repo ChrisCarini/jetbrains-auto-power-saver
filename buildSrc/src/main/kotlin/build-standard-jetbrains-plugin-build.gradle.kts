@@ -95,10 +95,22 @@ if (isNotCI) {
     //     project.ext.set("intellijPluginPublishToken", "YOUR_TOKEN_HERE")
     //
     // Because this contains credentials, this file is also included in .gitignore file.
-    apply(from = "jetbrainsCredentials.gradle")
+    //
+    // This file (along with the `chain.crt` & `private.pem` files it references) is *optional*;
+    // it is only needed to sign & publish the plugin locally. When it is absent, the project can
+    // still be imported & built - the signing/publishing credentials simply resolve to invalid
+    // placeholder values (see `resolve` below).
+    val jetbrainsCredentials = file("jetbrainsCredentials.gradle")
+    if (jetbrainsCredentials.exists()) {
+        apply(from = jetbrainsCredentials)
+    }
 }
 fun resolve(extraKey: String, environmentKey: String): String =
-    if (isNotCI) extra(extraKey) else environment(environmentKey).getOrElse("DEFAULT_INVALID_$environmentKey")
+    if (isNotCI) {
+        if (project.ext.has(extraKey)) extra(extraKey) else "DEFAULT_INVALID_$extraKey"
+    } else {
+        environment(environmentKey).getOrElse("DEFAULT_INVALID_$environmentKey")
+    }
 
 val signPluginCertificateChain = resolve("intellijSignPluginCertificateChain", "CERTIFICATE_CHAIN")
 val signPluginPrivateKey = resolve("intellijSignPluginPrivateKey", "PRIVATE_KEY")
