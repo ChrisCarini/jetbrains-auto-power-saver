@@ -1,9 +1,9 @@
 import org.gradle.plugins.ide.idea.model.IdeaLanguageLevel
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
-import org.jetbrains.intellij.platform.gradle.Constants
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+import org.jetbrains.intellij.platform.gradle.extensions.parseIdeNotation
 import org.jetbrains.intellij.platform.gradle.models.ProductRelease
 import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask
 import java.util.EnumSet
@@ -44,12 +44,6 @@ repositories {
     // https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-repositories-extension.html
     intellijPlatform {
         defaultRepositories()
-        // `jetbrainsRuntime()` is necessary mostly for EAP/SNAPSHOT releases of IJ so that the IDE pulls the correct JBR
-        //      - https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-jetbrains-runtime.html#obtained-with-intellij-platform-from-maven
-        val isSnapshot = platformVersion.endsWith("-SNAPSHOT")
-        if (isSnapshot) {
-            jetbrainsRuntime()
-        }
     }
 }
 
@@ -71,14 +65,6 @@ dependencies {
         plugins(platformPlugins.map { it.split(',') })
         // Plugin Dependencies. Uses `platformBundledPlugins` property from the gradle.properties file for bundled IntelliJ Platform plugins.
         bundledPlugins(platformBundledPlugins.map { it.split(',') })
-
-        // `jetbrainsRuntime()` is necessary mostly for EAP/SNAPSHOT releases of IJ so that the IDE pulls the correct JBR
-        //      - https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-jetbrains-runtime.html#obtained-with-intellij-platform-from-maven
-        if (isSnapshot) {
-            jetbrainsRuntime()
-        }
-        pluginVerifier()
-        zipSigner()
         testFramework(TestFrameworkType.Platform)
     }
 
@@ -151,7 +137,6 @@ intellijPlatform {
 
         ideaVersion {
             sinceBuild = pluginSinceBuild
-            untilBuild = pluginUntilBuild
         }
 
         // Vendor information -> https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-extension.html#intellijPlatform-pluginConfiguration-vendor
@@ -216,7 +201,7 @@ intellijPlatform {
 
         val failureLevels = getFailureLevels()
         logger.debug("Using ${failureLevels.size} Failure Levels: $failureLevels")
-        failureLevel.set(failureLevels)
+        failureLevel = failureLevels
         ides {
             logger.lifecycle("Verifying against IntelliJ $platformVersion")
             create(
@@ -253,7 +238,7 @@ tasks {
         // Verify against the most recent patch release of the `platformVersion` version
         // (ie, if `platformVersion` = 2022.2, and the latest patch release is `2022.2.2`,
         // then the `sinceVersion` will be set to `2022.2.2` and *NOT* `2022.2`.
-        sinceBuild.set(platformVersion)
+        sinceBuild = platformVersion
     }
 
     // Sanity check task to ensure necessary variables are set.
@@ -272,15 +257,16 @@ tasks {
             val ideVersionsList = mutableListOf<String>()
 
             // Include the versions produced from the `printProductsReleases` task.
-            printProductsReleases.flatMap { it.productsReleases }.map { it.joinToString("\n") }.get().split("\n").forEach { line ->
-                ideVersionsList.add("idea" + line.replace("-", ":"))
+            printProductsReleases.flatMap { it.productsReleases }.get().forEach { line ->
+                val (type, version) = line.parseIdeNotation()
+                ideVersionsList.add("${type.installer?.artifactId}:$version")
             }
 
             // Include the versions specified in `gradle.properties` `pluginVerifierIdeVersions` property.
             val environment: String = environment("GITHUB_EVENT_NAME").getOrElse("__")
             pluginVerifierIdeVersions.split(",").map { it.trim() }.forEach { version ->
                 // Only add 'LATEST-EAP-SNAPSHOT' during scheduled runs.
-                if ("LATEST-EAP-SNAPSHOT".equals(version) && !"schedule".equals(environment)) {
+                if ("LATEST-EAP-SNAPSHOT" == version && "schedule" != environment) {
                     return@forEach
                 }
 
@@ -288,13 +274,9 @@ tasks {
             }
 
             // Write out file with unique pairs of type + version
-            val outFileWriter = File(
-                layout.buildDirectory.get().toString(), "intellij-platform-plugin-verifier-action-ide-versions-file.txt"
-            ).printWriter()
-            ideVersionsList.distinct().forEach { version ->
-                outFileWriter.println(version)
-            }
-            outFileWriter.close()
+            layout.buildDirectory
+                .file("intellij-platform-plugin-verifier-action-ide-versions-file.txt").get().asFile
+                .writeText(ideVersionsList.distinct().joinToString("\n"))
         }
     }
 
@@ -327,6 +309,6 @@ val runIdeForUiTests by intellijPlatformTesting.runIde.registering {
     }
 
     plugins {
-        robotServerPlugin(Constants.Constraints.LATEST_VERSION)
+        robotServerPlugin()
     }
 }
