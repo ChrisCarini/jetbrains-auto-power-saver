@@ -23,7 +23,7 @@ jobs:
     steps:
       # Check out current repository
       - name: Fetch Sources
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         timeout-minutes: 1
 
       # Setup Java
@@ -36,7 +36,7 @@ jobs:
 
       # Generate and submit dependency graph
       - name: Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
+        uses: gradle/actions/dependency-submission@50e97c2cd7a37755bbfafc9c5b7cafaece252f6e # v6.1.0
         with:
           # Reducing storage costs for saved dependency graph artifacts (store for 1 day instead of 30 days)
           # See: https://github.com/gradle/actions/blob/main/docs/dependency-submission.md#reducing-storage-costs-for-saved-dependency-graph-artifacts
