@@ -14,6 +14,7 @@ fun extra(key: String): String = project.ext.get(key) as String
 
 val javaVersion = properties("javaVersion")
 val platformBundledPlugins = providers.gradleProperty("platformBundledPlugins")
+val platformBundledModules = providers.gradleProperty("platformBundledModules")
 val platformPlugins = providers.gradleProperty("platformPlugins")
 val platformVersion = properties("platformVersion")
 val pluginGroup = properties("pluginGroup")
@@ -65,6 +66,8 @@ dependencies {
         plugins(platformPlugins.map { it.split(',') })
         // Plugin Dependencies. Uses `platformBundledPlugins` property from the gradle.properties file for bundled IntelliJ Platform plugins.
         bundledPlugins(platformBundledPlugins.map { it.split(',') })
+        // Module Dependencies. Uses `platformBundledModules` property from the gradle.properties file for bundled IntelliJ Platform modules.
+        bundledModules(platformBundledModules.map { it.split(',') }.orElse(emptyList()))
         testFramework(TestFrameworkType.Platform)
     }
 
