@@ -234,6 +234,9 @@ intellijPlatform {
 // Configure CHANGELOG.md - https://github.com/JetBrains/gradle-changelog-plugin
 changelog {
     repositoryUrl = pluginRepositoryUrl
+    // Keep these headings so the platform updater cannot write new entries into a released version.
+    keepUnreleasedSection.set(true)
+    groups.set(listOf("Added", "Changed", "Deprecated", "Removed", "Fixed", "Security"))
 }
 
 tasks {
