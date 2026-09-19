@@ -22,7 +22,7 @@ jobs:
         timeout-minutes: 5
         with:
           distribution: zulu
-          java-version: 21
+          java-version: 25
           cache: gradle
 
       - name: Update Gradle Wrapper

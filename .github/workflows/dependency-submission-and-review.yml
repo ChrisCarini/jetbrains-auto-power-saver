@@ -11,14 +11,14 @@ permissions:
 
 jobs:
   dependency-submission-and-review:
-    
+
     # 2026-05-15 - DISABLE WORKFLOW: This workflow consistently fails because the IntelliJ Platform currently brings in two
-    #                                bad versions of `com.fasterxml.jackson.core:jackson-core` and one bad version of 
-    #                                `io.undertow:undertow-core`, which causes the workflow to fail and give a bad signal 
+    #                                bad versions of `com.fasterxml.jackson.core:jackson-core` and one bad version of
+    #                                `io.undertow:undertow-core`, which causes the workflow to fail and give a bad signal
     #                                during CI. I suspect that these dependencies need to be bumped in either (a) IntelliJ
     #                                platform, (b) the IntelliJ Gradle plugin, (c) both.
     if: false
-    
+
     runs-on: ubuntu-latest
     steps:
       # Check out current repository
@@ -32,7 +32,7 @@ jobs:
         timeout-minutes: 5
         with:
           distribution: zulu
-          java-version: 21
+          java-version: 25
 
       # Generate and submit dependency graph
       - name: Generate and submit dependency graph

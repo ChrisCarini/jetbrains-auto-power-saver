@@ -50,7 +50,7 @@ jobs:
         timeout-minutes: 5
         with:
           distribution: zulu
-          java-version: 21
+          java-version: 25
 
       # Setup Gradle
       - name: Setup Gradle
@@ -67,6 +67,15 @@ jobs:
       # Run tests
       - name: Run Tests
         run: ./gradlew check
+
+      - name: Upload reports
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-report
+          path: build/reports/
+          retention-days: 14
+          if-no-files-found: warn
 
   # Build plugin with buildPlugin Gradle task and provide the artifact for the next workflow jobs
   # Requires test job to be passed
@@ -92,7 +101,7 @@ jobs:
         timeout-minutes: 5
         with:
           distribution: zulu
-          java-version: 21
+          java-version: 25
 
       # Setup Gradle
       - name: Setup Gradle
