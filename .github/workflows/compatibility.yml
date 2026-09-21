@@ -60,7 +60,7 @@ jobs:
 #      # https://github.com/jlumbroso/free-disk-space
 # NOTE: Tried removing this on 2024-02-08, but ran out of diskspace on the 2023.3.4 upgrade PRs. Re-enabling.
       - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
+        uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
         with:
           # this remove tools (actions/setup-java) that are needed; hence, disable.
           tool-cache: false
