@@ -101,6 +101,30 @@ jobs:
       - name: Monitor disk usage
         uses: ChrisCarini/disk-usage-action@aaf40eb87330c67b4eeebba90d83e25dc3198a66 # v0.0.1
 
+      - name: Check available disk space
+        id: disk_space
+        shell: bash
+        env:
+          MIN_FREE_DISK_GIB: '35'
+        run: |
+          available_kib="$(LC_ALL=C df -k --output=avail -- "$GITHUB_WORKSPACE" | awk 'NR == 2 {print $1}')"
+          if [[ ! "$available_kib" =~ ^[0-9]+$ ]]; then
+            echo "::error::Could not determine available disk space."
+            exit 1
+          fi
+
+          threshold_kib=$((MIN_FREE_DISK_GIB * 1024 * 1024))
+          echo "Available disk space: $available_kib KiB; cleanup threshold: $threshold_kib KiB ($MIN_FREE_DISK_GIB GiB)"
+          printf 'available_kib=%s\nthreshold_kib=%s\n' \
+            "$available_kib" "$threshold_kib" >> "$GITHUB_OUTPUT"
+
+      - name: Free Disk Space (Ubuntu)
+        if: fromJSON(steps.disk_space.outputs.available_kib) < fromJSON(steps.disk_space.outputs.threshold_kib)
+        uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
+        with:
+          tool-cache: false
+          docker-images: false
+
       # Setup Java environment for the next steps
       - name: Setup Java
         uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
