@@ -34,6 +34,9 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         timeout-minutes: 1
 
+      - name: Monitor disk usage
+        uses: ChrisCarini/disk-usage-action@aaf40eb87330c67b4eeebba90d83e25dc3198a66 # v0.0.1
+
       - name: Setup Java
         uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
         timeout-minutes: 5
